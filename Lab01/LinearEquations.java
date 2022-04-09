@@ -1,39 +1,28 @@
-import javax.swing.JOptionPane;
+import java.util.Scanner;
+
 public class LinearEquations {
-	public static void main (String[] args) {
-		String a, b;
-		a = JOptionPane.showInputDialog(null,
-			"Input the value for a: ", "Input a",
-			JOptionPane.INFORMATION_MESSAGE);
-		b = JOptionPane.showInputDialog(null,
-			"Input the value for b: ", "Input b",
-			JOptionPane.INFORMATION_MESSAGE);
+	public static void main(String[] args) {
+		System.out.println("Linear Equation Solver");
+		System.out.println("Given an equation ax+b=0, please enter the constants a and b: ");
 
-		double a1 = Double.parseDouble(a);
-		double b1 = Double.parseDouble(b);
+		Scanner scanner = new Scanner(System.in);
 
-		String solution;
+		System.out.print("a: ");
+		double a = scanner.nextDouble();
 
-		if (a1 == 0) {
-			if (b1 == 0) {
-				solution = "The linear equation has infinitely many solutions";
+		System.out.print("b: ");
+		double b = scanner.nextDouble();
 
+		if (a == 0) {
+			if (b == 0) {
+				System.out.println("The linear equation has infinitely many solutions.");
 			}
 			else {
-				solution = "The linear equation has no solution";
+				System.out.println("The linear solution has no solution.");
 			}
-
-
 		}
-
 		else {
-			solution = "The solution of the linear equation is: " + (-b1/a1);
+			System.out.println("The solution of the linear equation is: " + (-b/a));
 		}
-		
-		JOptionPane.showMessageDialog(null,
-			solution);
-		System.exit(0);
-
 	}
-
 }
