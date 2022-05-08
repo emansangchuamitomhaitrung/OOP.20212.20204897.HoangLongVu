@@ -18,9 +18,23 @@ public class Aims {
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
         anOrder.addDigitalVideoDisc(dvd3);
 
-        // print total cost of the items in the cart
-        System.out.println("Total cost is: ");
-        System.out.println(anOrder.totalCost());
+        // Print total cost of the items in the cart
+        System.out.println("Total cost is: " + anOrder.totalCost());
+
+        // Remove items
+        anOrder.removeDigitalVideoDisc(new DigitalVideoDisc("Aladin"));
+        anOrder.removeDigitalVideoDisc(new DigitalVideoDisc("Doctor Strange"));  // item not found
+
+        // Testing overloading methods
+        DigitalVideoDisc[] dvdList = {new DigitalVideoDisc("Star Wars 2"), new DigitalVideoDisc("Bond")};
+        anOrder.addDigitalVideoDisc(dvdList);  // method with input as an array
+
+        anOrder.addDigitalVideoDisc(new DigitalVideoDisc("Before sunrise"),
+                new DigitalVideoDisc("Before sunset"),
+                new DigitalVideoDisc("Before midnight")); // method with arbitrary number of arguments
+
+        anOrder.addDigitalVideoDisc(new DigitalVideoDisc("Bond 01"), new DigitalVideoDisc("Bond 02")); // method with two parameters
+
 
     }
 }

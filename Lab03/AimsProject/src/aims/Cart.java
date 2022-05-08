@@ -1,8 +1,5 @@
 package aims;
 
-import com.sun.webkit.dom.DocumentImpl;
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-
 public class Cart {
     public static final int MAX_NUMBERS_ORDERED = 20;
     private DigitalVideoDisc itemsOrdered[] =
@@ -10,14 +7,15 @@ public class Cart {
     int qtyOrdered = 0;
 
     public void addDigitalVideoDisc(DigitalVideoDisc disc) {
-        if(this.qtyOrdered < 20) {
+        if(this.qtyOrdered < MAX_NUMBERS_ORDERED) {
             itemsOrdered[qtyOrdered] = disc;
             qtyOrdered++;
-            System.out.println("Disc added sucessfully.");
+            System.out.println("Disc added sucessfully. Title: " + disc.getTitle());
         }
         else {
             System.out.println("The cart is almost full.");
         }
+        System.out.println("Currently: " + qtyOrdered + " items in cart.");
     }
 
 
@@ -26,9 +24,17 @@ public class Cart {
             System.out.println("Error. The cart is empty");
         }
         else {
-            // FUNCTION TO REMOVE THE DISC
-            System.out.println("Disc removed successfully. There are " + this.qtyOrdered + " items left in the cart.");
+            int removeCount = 0;
+            for(int i=0; i < this.qtyOrdered; i++) {
+                if(disc.getTitle() == itemsOrdered[i].getTitle()) {
+                    itemsOrdered[i] = null;
+                    qtyOrdered--;
+                    removeCount++;
+                }
+            }
+            System.out.println("Removed " + removeCount + " discs successfully.");
         }
+        System.out.println("Currently: " + qtyOrdered + " items in cart.");
     }
 
     public float totalCost() {
@@ -40,16 +46,57 @@ public class Cart {
         return cost;
     }
 
-    // overloading methods
+    // OVERLOADING METHODS
+    // Add a list of DVDs to the current cart
     public void addDigitalVideoDisc(DigitalVideoDisc [] dvdList) {
+        int count = 0;
+        for (DigitalVideoDisc disc : dvdList) {
+            if (this.qtyOrdered < MAX_NUMBERS_ORDERED) {
+                itemsOrdered[qtyOrdered] = disc;
+                qtyOrdered++;
+                count++;
+            }
+        }
+        System.out.println(count + " discs added successfully.");
+        System.out.println("Currently: " + qtyOrdered + " items in cart.");
 
     }
 
-    public void addDigitalVideoDisc(DigitalVideoDisc... dvd) {
-
+    // Add an arbitrary number of arguments
+    public void addDigitalVideoDisc(DigitalVideoDisc... discs) {
+        int count = 0;
+        for(DigitalVideoDisc dvd:discs) {
+            if(this.qtyOrdered < MAX_NUMBERS_ORDERED) {
+                itemsOrdered[qtyOrdered] = dvd;
+                qtyOrdered++;
+                count++;
+            }
+        }
+        System.out.println(count + " discs added successfully.");
+        System.out.println("Currently: " + qtyOrdered + " items in cart.");
     }
 
+    // Add two DVDs at the same time
     public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+        if(this.qtyOrdered < MAX_NUMBERS_ORDERED) {
+            itemsOrdered[qtyOrdered] = dvd1;
+            qtyOrdered++;
+            System.out.println("Disc added sucessfully. Title: " + dvd1.getTitle());
+        }
+        else {
+            System.out.println("The cart is almost full.");
+        }
+
+        if(this.qtyOrdered < MAX_NUMBERS_ORDERED) {
+            itemsOrdered[qtyOrdered] = dvd2;
+            qtyOrdered++;
+            System.out.println("Disc added successfully. Title: " + dvd2.getTitle());
+        }
+        else {
+            System.out.println("The cart is almost full.");
+        }
+        System.out.println("Currently: " + qtyOrdered + " items in cart.");
+
 
     }
 
