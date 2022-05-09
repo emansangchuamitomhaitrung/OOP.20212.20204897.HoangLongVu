@@ -1,10 +1,10 @@
 package aims;
 
 public class Cart {
-    public static final int MAX_NUMBERS_ORDERED = 20;
+    public static final int MAX_NUMBERS_ORDERED = 5;
     private DigitalVideoDisc itemsOrdered[] =
             new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
-    int qtyOrdered = 0;
+    private int qtyOrdered = 0;
 
     public void addDigitalVideoDisc(DigitalVideoDisc disc) {
         if(this.qtyOrdered < MAX_NUMBERS_ORDERED) {
@@ -17,7 +17,6 @@ public class Cart {
         }
         System.out.println("Currently: " + qtyOrdered + " items in cart.");
     }
-
 
     public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
         if(this.qtyOrdered == 0) {
@@ -32,7 +31,7 @@ public class Cart {
                     removeCount++;
                 }
             }
-            System.out.println("Removed " + removeCount + " discs successfully.");
+            System.out.println("Removed " + removeCount + " disc(s) successfully.");
         }
         System.out.println("Currently: " + qtyOrdered + " items in cart.");
     }
@@ -49,30 +48,32 @@ public class Cart {
     // OVERLOADING METHODS
     // Add a list of DVDs to the current cart
     public void addDigitalVideoDisc(DigitalVideoDisc [] dvdList) {
-        int count = 0;
         for (DigitalVideoDisc disc : dvdList) {
             if (this.qtyOrdered < MAX_NUMBERS_ORDERED) {
                 itemsOrdered[qtyOrdered] = disc;
                 qtyOrdered++;
-                count++;
+                System.out.println("Disc added successfully. Title: " + disc.getTitle());
+            }
+            else {
+                System.out.println("The cart is almost full.");
             }
         }
-        System.out.println(count + " discs added successfully.");
         System.out.println("Currently: " + qtyOrdered + " items in cart.");
 
     }
 
     // Add an arbitrary number of arguments
     public void addDigitalVideoDisc(DigitalVideoDisc... discs) {
-        int count = 0;
         for(DigitalVideoDisc dvd:discs) {
             if(this.qtyOrdered < MAX_NUMBERS_ORDERED) {
                 itemsOrdered[qtyOrdered] = dvd;
                 qtyOrdered++;
-                count++;
+                System.out.println("Disc added successfully. Title: " + dvd.getTitle());
+            }
+            else {
+                System.out.println("The cart is almost full.");
             }
         }
-        System.out.println(count + " discs added successfully.");
         System.out.println("Currently: " + qtyOrdered + " items in cart.");
     }
 
@@ -96,7 +97,6 @@ public class Cart {
             System.out.println("The cart is almost full.");
         }
         System.out.println("Currently: " + qtyOrdered + " items in cart.");
-
 
     }
 
