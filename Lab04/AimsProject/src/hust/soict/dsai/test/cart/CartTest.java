@@ -2,6 +2,7 @@ package hust.soict.dsai.test.cart;
 
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import java.util.Scanner;
 
 public class CartTest {
     public static void main(String[] args) {
@@ -26,6 +27,12 @@ public class CartTest {
         // Test print method
         cart.print();
         // Test search method
-        cart.searchDVD(2); // returns Aladin DVD
+        System.out.println();
+        System.out.println("===DVD BROWSER===");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter ID: ");
+        int id = scanner.nextInt();
+        cart.searchDVD(id);
     }
+
 }

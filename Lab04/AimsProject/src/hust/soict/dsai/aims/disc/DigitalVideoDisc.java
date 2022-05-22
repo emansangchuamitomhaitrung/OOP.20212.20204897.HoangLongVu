@@ -81,8 +81,9 @@ public class DigitalVideoDisc {
         nbDigitalVideoDiscs++;
     }
 
-//    public String toString() {
-//
-//    }
+    public String toString() {
+        return "DVD - " + this.title + '\t' + this.category
+                + '\t' + this.director + '\t' + this.length + ": $" + this.cost;
+    }
 
 }

@@ -2,6 +2,7 @@ package hust.soict.dsai.aims.cart;
 
 
 import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import org.omg.CORBA.INTERNAL;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -141,7 +142,7 @@ public class Cart {
             }
         }
         if (ITEM_FOUND == 1) {
-            System.out.println("Item found. Title: " + itemsOrdered[index].getTitle());
+            System.out.println("Item found. " + itemsOrdered[index].toString());
         }
         else {
             System.out.println("Item not found. Please try another ID.");
@@ -180,8 +181,9 @@ public class Cart {
 
 
         for(int i = 0; i < this.qtyOrdered; i++) {
-            System.out.println(Integer.toString(i+1) + ". DVD - " + tmp[i].getTitle() + '\t' + tmp[i].getCategory()
-            + '\t' + tmp[i].getDirector() + '\t' + tmp[i].getLength() + ": $" + tmp[i].getCost());
+//            System.out.println(Integer.toString(i+1) + ". DVD - " + tmp[i].getTitle() + '\t' + tmp[i].getCategory()
+//            + '\t' + tmp[i].getDirector() + '\t' + tmp[i].getLength() + ": $" + tmp[i].getCost());
+            System.out.println(Integer.toString(i+1) + ". " + tmp[i].toString());
         }
         System.out.println("Total cost: $" + this.totalCost());
 
