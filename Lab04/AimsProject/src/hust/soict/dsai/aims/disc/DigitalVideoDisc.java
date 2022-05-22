@@ -1,4 +1,4 @@
-package aims;
+package hust.soict.dsai.aims.disc;
 
 import java.time.LocalDate;
 
@@ -12,6 +12,17 @@ public class DigitalVideoDisc {
     private static int nbDigitalVideoDiscs = 0;
     private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public LocalDate getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(LocalDate dateAdded) {
+        this.dateAdded = dateAdded;
+    }
 
     public String getTitle() {
         return title;
@@ -69,4 +80,9 @@ public class DigitalVideoDisc {
         this.id = nbDigitalVideoDiscs;
         nbDigitalVideoDiscs++;
     }
+
+//    public String toString() {
+//
+//    }
+
 }
