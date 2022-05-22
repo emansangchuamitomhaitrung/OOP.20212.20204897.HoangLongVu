@@ -1,6 +1,8 @@
 package aims;
 
-import com.sun.corba.se.impl.transport.DefaultIORToSocketInfoImpl;
+
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class DVDUtils {
     public static int compareByCost (DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
@@ -30,11 +32,24 @@ public class DVDUtils {
     }
 
     public static DigitalVideoDisc[] sortByCost(DigitalVideoDisc[] dvdList) {
-        //TODO write sth here
+        Arrays.sort(dvdList, new Comparator<DigitalVideoDisc>() {
+            @Override
+            public int compare(DigitalVideoDisc o1, DigitalVideoDisc o2) {
+                return Float.compare(o1.getCost(), o2.getCost());
+            }
+        });
+        return dvdList;
     }
 
     public static DigitalVideoDisc[] sortByTitle(DigitalVideoDisc[] dvdList) {
-        //TODO write sth here
-
+        Arrays.sort(dvdList, new Comparator<DigitalVideoDisc>() {
+            @Override
+            public int compare(DigitalVideoDisc o1, DigitalVideoDisc o2) {
+                return o1.getTitle().compareToIgnoreCase(o2.getTitle());
+            }
+        });
+        return dvdList;
     }
+
+
 }

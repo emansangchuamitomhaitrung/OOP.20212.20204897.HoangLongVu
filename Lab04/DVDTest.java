@@ -11,16 +11,19 @@ public class DVDTest {
         System.out.println(DVDUtils.compareByCost(dvd1, dvd2));
         System.out.println(DVDUtils.compareByTitle(dvd5, dvd3));
 
-//        DigitalVideoDisc[] sorted = DVDUtils.sortByCost(new DigitalVideoDisc[] {dvd1, dvd2, dvd3, dvd4, dvd5});
-//        System.out.println("Sort by cost: ");
-//        for(int i = 0; i < sorted.length; i++) {
-//            System.out.println(sorted[i].toString());
-//        }
-//
-//        sorted = DVDUtils.sortbyTitle(new DigitalVideoDisc[] {dvd1, dvd2, dvd3, dvd4, dvd5});
-//        System.out.println("Sort by title: ");
-//        for(int i = 0; i < sorted.length; i++) {
-//            System.out.println(sorted[i].toString());
-//        }
+        DigitalVideoDisc[] sorted = DVDUtils.sortByCost(new DigitalVideoDisc[] {dvd1, dvd2, dvd3, dvd4, dvd5});
+        System.out.println("Sort by cost: ");
+        for(int i = 0; i < sorted.length; i++) {
+            //System.out.println(sorted[i].toString());
+            System.out.println(sorted[i].getTitle());
+        }
+
+        sorted = DVDUtils.sortByTitle(new DigitalVideoDisc[] {dvd1, dvd2, dvd3, dvd4, dvd5});
+        System.out.println("Sort by title: ");
+        for(int i = 0; i < sorted.length; i++) {
+            //System.out.println(sorted[i].toString());
+            System.out.println(sorted[i].getTitle());
+        }
     }
 }
+
