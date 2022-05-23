@@ -2,8 +2,8 @@ package hust.soict.dsai.aims.cart;
 
 
 import hust.soict.dsai.aims.disc.DigitalVideoDisc;
-import org.omg.CORBA.INTERNAL;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -13,6 +13,10 @@ public class Cart {
             new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
     private int qtyOrdered = 0;
 
+    public int getQtyOrdered() {
+        return qtyOrdered;
+    }
+
     public DigitalVideoDisc[] getItemsOrdered() {
         return itemsOrdered;
     }
@@ -21,7 +25,7 @@ public class Cart {
         if(this.qtyOrdered < MAX_NUMBERS_ORDERED) {
             itemsOrdered[qtyOrdered] = disc;
             qtyOrdered++;
-            System.out.println("Disc added sucessfully. Title: " + disc.getTitle());
+            System.out.println("Disc added successfully. Title: " + disc.getTitle());
         }
         else {
             System.out.println("The cart is almost full.");
@@ -95,7 +99,7 @@ public class Cart {
         if(this.qtyOrdered < MAX_NUMBERS_ORDERED) {
             itemsOrdered[qtyOrdered] = dvd1;
             qtyOrdered++;
-            System.out.println("Disc added sucessfully. Title: " + dvd1.getTitle());
+            System.out.println("Disc added successfully. Title: " + dvd1.getTitle());
         }
         else {
             System.out.println("The cart is almost full.");
@@ -112,7 +116,7 @@ public class Cart {
         System.out.println("Currently: " + qtyOrdered + " items in cart.");
 
     }
-
+/*
     public void sortByCost(DigitalVideoDisc[] dvdList) {
         Arrays.sort(dvdList, new Comparator<DigitalVideoDisc>() {
             @Override
@@ -123,6 +127,9 @@ public class Cart {
 
     }
 
+*/
+
+/*
     public void sortByTitle(DigitalVideoDisc[] dvdList) {
         Arrays.sort(dvdList, new Comparator<DigitalVideoDisc>() {
             @Override
@@ -132,16 +139,17 @@ public class Cart {
         });
     }
 
-    public void searchDVD(int id) {
-        int ITEM_FOUND = 0;
+ */
+    public void searchById(int id) {
+        boolean found = false;
         int index = 0;
         for (int i = 0; i < qtyOrdered; i++) {
             if (itemsOrdered[i].getId() == id) {
-                ITEM_FOUND = 1;
+                found = true;
                 index = i;
             }
         }
-        if (ITEM_FOUND == 1) {
+        if (found) {
             System.out.println("Item found. " + itemsOrdered[index].toString());
         }
         else {
@@ -169,24 +177,93 @@ public class Cart {
         return dvdList;
     }
 
-    public void print() {
+    public DigitalVideoDisc[] sortByTitleCost(DigitalVideoDisc[] dvdList) {
+        // sort by title
+        Comparator<DigitalVideoDisc> nameSort = Comparator.comparing(DigitalVideoDisc::getTitle);
+
+        // sort by cost
+        Comparator<DigitalVideoDisc> costSort = Comparator.comparing(DigitalVideoDisc::getCost, Comparator.reverseOrder());
+
+        // combining multiple sort comparators
+        Comparator<DigitalVideoDisc> multipleFieldComparator = nameSort
+                .thenComparing(costSort);
+
+        // sorting
+        Arrays.sort(dvdList, multipleFieldComparator);
+        return dvdList;
+    }
+
+    public DigitalVideoDisc[] sortByCostTitle(DigitalVideoDisc[] dvdList) {
+        // sort by title
+        Comparator<DigitalVideoDisc> nameSort = Comparator.comparing(DigitalVideoDisc::getTitle);
+
+        // sort by cost
+        Comparator<DigitalVideoDisc> costSort = Comparator.comparing(DigitalVideoDisc::getCost, Comparator.reverseOrder());
+
+        // combining multiple sort comparators
+        Comparator<DigitalVideoDisc> multipleFieldComparator = costSort
+                .thenComparing(nameSort);
+
+        // sorting
+        Arrays.sort(dvdList, multipleFieldComparator);
+        return dvdList;
+    }
+
+
+        public void print() {
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
 
         DigitalVideoDisc[] tmp = new DigitalVideoDisc[this.qtyOrdered];
-        for(int i = 0; i < this.qtyOrdered; i++) {
-            tmp[i] = this.itemsOrdered[i];
-        }
+        System.arraycopy(this.itemsOrdered, 0, tmp, 0, this.qtyOrdered);
         sortByTitleCostLength(tmp);
 
-
         for(int i = 0; i < this.qtyOrdered; i++) {
-//            System.out.println(Integer.toString(i+1) + ". DVD - " + tmp[i].getTitle() + '\t' + tmp[i].getCategory()
-//            + '\t' + tmp[i].getDirector() + '\t' + tmp[i].getLength() + ": $" + tmp[i].getCost());
-            System.out.println(Integer.toString(i+1) + ". " + tmp[i].toString());
+            System.out.println(i + 1 + ". " + tmp[i].toString());
         }
-        System.out.println("Total cost: $" + this.totalCost());
+        DecimalFormat numberFormat = new DecimalFormat("#.00"); // format two 2 numbers after decimal point
+        System.out.println("Total cost: $" + numberFormat.format(this.totalCost()));
 
     }
 
+    public void searchByTitle(String title) {
+        for(DigitalVideoDisc disc : this.itemsOrdered) {
+            if(disc.isMatch(title)) {
+                System.out.println("Item found. " + disc);
+            }
+            else {
+                System.out.println("Item not found. Please try another title.");
+            }
+        }
+    }
+
+    public void filterById(int id) {
+        boolean found = false;
+        System.out.println("Search Result:");
+        for(DigitalVideoDisc disc : this.itemsOrdered) {
+            if(disc.getId() == id) {
+                System.out.println(disc);
+                found = true;
+            }
+        }
+        if(!found) {
+            System.out.println("Items not found. Please enter another ID.");
+        }
+    }
+
+    public void filterByTitle(String title) {
+        boolean found = false;
+        System.out.println("Search Result:");
+        for(DigitalVideoDisc disc : this.itemsOrdered) {
+            if(disc.getTitle().equalsIgnoreCase(title)) {
+                System.out.println(disc);;
+                found = true;
+            }
+        }
+        if(!found) {
+            System.out.println("Items not found. Please enter another title (case-insensitive).");
+        }
+    }
 }
+
+

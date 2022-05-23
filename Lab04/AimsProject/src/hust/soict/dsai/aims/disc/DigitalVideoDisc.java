@@ -2,6 +2,7 @@ package hust.soict.dsai.aims.disc;
 
 import java.time.LocalDate;
 
+
 public class DigitalVideoDisc {
     private String title;
     private String category;
@@ -82,8 +83,12 @@ public class DigitalVideoDisc {
     }
 
     public String toString() {
-        return "DVD - " + this.title + '\t' + this.category
-                + '\t' + this.director + '\t' + this.length + ": $" + this.cost;
+        return "DVD (ID = " + id + ") - " + this.title + "\t - \t" + this.category
+                + "\t - \t" + this.director + "\t - \t" + this.length + "\t : \t $" + this.cost;
+    }
+
+    public boolean isMatch(String title) {
+        return this.title.toLowerCase().contains(title.toLowerCase());
     }
 
 }

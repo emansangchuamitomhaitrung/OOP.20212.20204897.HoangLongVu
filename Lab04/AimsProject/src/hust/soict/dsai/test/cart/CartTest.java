@@ -32,7 +32,7 @@ public class CartTest {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter ID: ");
         int id = scanner.nextInt();
-        cart.searchDVD(id);
+        cart.searchById(id);
     }
 
 }
