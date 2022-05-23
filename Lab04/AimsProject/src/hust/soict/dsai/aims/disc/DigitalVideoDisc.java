@@ -2,6 +2,8 @@ package hust.soict.dsai.aims.disc;
 
 import java.time.LocalDate;
 
+import static java.time.LocalDate.*;
+
 
 public class DigitalVideoDisc {
     private String title;
@@ -11,7 +13,7 @@ public class DigitalVideoDisc {
     private float cost;
     private LocalDate dateAdded;
     private static int nbDigitalVideoDiscs = 0;
-    private int id;
+    private final int id;
 
     public int getId() {
         return id;
@@ -19,10 +21,6 @@ public class DigitalVideoDisc {
 
     public LocalDate getDateAdded() {
         return dateAdded;
-    }
-
-    public void setDateAdded(LocalDate dateAdded) {
-        this.dateAdded = dateAdded;
     }
 
     public String getTitle() {
@@ -45,16 +43,13 @@ public class DigitalVideoDisc {
         return cost;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public DigitalVideoDisc(String title, String category, String director, float cost) {
         this.title = title;
         this.category = category;
         this.director = director;
         this.cost = cost;
         this.id = nbDigitalVideoDiscs;
+        this.dateAdded = now();
         nbDigitalVideoDiscs++;
     }
 
@@ -63,12 +58,14 @@ public class DigitalVideoDisc {
         this.category = category;
         this.cost = cost;
         this.id = nbDigitalVideoDiscs;
+        this.dateAdded = now();
         nbDigitalVideoDiscs++;
     }
 
     public DigitalVideoDisc(String title) {
         this.title = title;
         this.id = nbDigitalVideoDiscs;
+        this.dateAdded = now();
         nbDigitalVideoDiscs++;
     }
 
@@ -78,6 +75,7 @@ public class DigitalVideoDisc {
         this.director = director;
         this.length = length;
         this.cost = cost;
+        this.dateAdded = now();
         this.id = nbDigitalVideoDiscs;
         nbDigitalVideoDiscs++;
     }

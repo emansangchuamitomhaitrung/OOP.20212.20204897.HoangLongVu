@@ -24,15 +24,27 @@ public class CartTest {
 
         DigitalVideoDisc dvd5 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 120, 19.95f); // test sort by title-cost-length
         cart.addDigitalVideoDisc(dvd5);
+
+        cart.removeDigitalVideoDisc(dvd5);
+
         // Test print method
         cart.print();
         // Test search method
         System.out.println();
         System.out.println("===DVD BROWSER===");
-        Scanner scanner = new Scanner(System.in);
+
         System.out.print("Enter ID: ");
+        Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
+        scanner.nextLine();
         cart.searchById(id);
+
+        System.out.println("Enter title: ");
+        String title = scanner.nextLine();
+        cart.searchByTitle(title);
+
     }
+
+
 
 }

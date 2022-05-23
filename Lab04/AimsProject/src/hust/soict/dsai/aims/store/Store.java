@@ -11,13 +11,11 @@ public class Store {
 
     public void addDVD(DigitalVideoDisc dvd) {
         this.itemsInStore.add(dvd);
-        dvd.setDateAdded(LocalDate.now());
         System.out.println("DVD added successfully. Title: " + dvd.getTitle());
     }
 
     public void removeDVD(DigitalVideoDisc dvd) {
         this.itemsInStore.remove(dvd);
-        dvd.setDateAdded(LocalDate.now());
         System.out.println("DVD removed successfully. Title: " + dvd.getTitle());
 
     }
