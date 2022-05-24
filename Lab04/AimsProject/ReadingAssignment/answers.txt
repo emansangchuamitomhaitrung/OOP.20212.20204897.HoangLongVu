@@ -1,0 +1,6 @@
+Question 1: 
+- After the call of `swap(jungleDVD,  cinderellaDVD)`, the title of two objects still remain, because the method just creates a copy of the references of jungleDVD and cinderella. These copies are swapped but the original objects still remain.
+- After the call of `changeTitle(jungleDVD, cinderellaDVD)`, the title of JungleDVD is changed, because it specifies the attribute to be swapped (title), and directly change the title with the setTitle method.
+
+Question 2: 
+- The return type of toString() method for DigitalVideoDisc class should be String.
