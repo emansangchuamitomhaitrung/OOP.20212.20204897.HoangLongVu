@@ -1,13 +1,14 @@
 package hust.soict.dsai.aims.media;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Book extends Media {
     private List<String> authors = new ArrayList<String>();
 
-    public Book() {
-        // TODO Auto-generated constructor stub
+    public Book(String title, String category, float cost, LocalDate dateAdded, int id) {
+        super(title, category, cost, dateAdded, id);
     }
 
     public List<String> getAuthors() {
@@ -19,23 +20,23 @@ public class Book extends Media {
     }
 
     public void addAuthor(String authorName) {
-        if(this.authors.contains(authorName)) {
-            System.out.println("Author already existed.");
+        for(String author : this.authors) {
+            if(author.equalsIgnoreCase(authorName.toLowerCase())) {
+                System.out.println("This author is already in the list.");
+            }
         }
-        else {
-            this.authors.add(authorName);
-            System.out.println("Author " + authorName + " added successfully.");
-        }
+        this.authors.add(authorName);
+        System.out.println("Author " + authorName + " added sucessfully.");
     }
 
     public void removeAuthor(String authorName) {
-        if(!this.authors.contains(authorName)) {
-            System.out.println("This author does not exist in the list. Please try again.");
+        for(String author : this.authors) {
+            if(!author.equalsIgnoreCase(authorName.toLowerCase())) {
+                System.out.println("Author does not exists. Please try another name.");
+            }
         }
-        else {
-            this.authors.remove(authorName);
-            System.out.println("Author " + authorName + " removed from the list.");
-        }
+        this.authors.remove(authorName);
+        System.out.println("Author " + authorName + " removed from the list.");
     }
 
 }

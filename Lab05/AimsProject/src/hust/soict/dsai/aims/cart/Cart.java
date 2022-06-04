@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Locale;
 
 
 public class Cart {
@@ -70,14 +71,14 @@ public class Cart {
     public void searchById(int id) {
         boolean found = false;
         int index = 0;
-        for (int i = 0; i < this.qtyOrdered; i++) {
-            if (itemsOrdered[i].getId() == id) {
+        for (int i = 0; i < this.itemsOrdered.size(); i++) {
+            if (itemsOrdered.get(i).getId() == id) {
                 found = true;
                 index = i;
             }
         }
         if (found) {
-            System.out.println("Item found. " + itemsOrdered[index].toString());
+            System.out.println("Item found. " + itemsOrdered.get(index).toString());
         }
         else {
             System.out.println("Item not found. Please try another ID.");
@@ -141,8 +142,8 @@ public class Cart {
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
 
-        DigitalVideoDisc[] tmp = new DigitalVideoDisc[this.qtyOrdered];
-        System.arraycopy(this.itemsOrdered, 0, tmp, 0, this.qtyOrdered);
+        DigitalVideoDisc[] tmp = new DigitalVideoDisc[this.itemsOrdered.size()];
+        System.arraycopy(this.itemsOrdered, 0, tmp, 0, this.itemsOrdered.size());
         sortByTitleCostLength(tmp);
 
         for(int i = 0; i < tmp.length; i++) {
@@ -156,14 +157,14 @@ public class Cart {
     public void searchByTitle(String title) {
         boolean found = false;
         int index = 0;
-        for (int i = 0; i < this.qtyOrdered; i++) {
-            if (this.itemsOrdered[i].isMatch(title)) {
+        for (int i = 0; i < this.itemsOrdered.size(); i++) {
+            if (this.itemsOrdered.get(i).equals(title.toLowerCase())) { //TODO check this later
                 found = true;
                 index = i;
             }
         }
         if (found) {
-            System.out.println("Item found. " + itemsOrdered[index].toString());
+            System.out.println("Item found. " + itemsOrdered.get(index).toString());
         }
         else {
             System.out.println("Item not found. Please try another ID.");
@@ -172,8 +173,8 @@ public class Cart {
 
     public void filterById(int id) {
         boolean found = false;
-        DigitalVideoDisc[] tmp = new DigitalVideoDisc[this.qtyOrdered];
-        System.arraycopy(this.itemsOrdered, 0, tmp, 0, this.qtyOrdered);
+        DigitalVideoDisc[] tmp = new DigitalVideoDisc[this.itemsOrdered.size()];
+        System.arraycopy(this.itemsOrdered, 0, tmp, 0, this.itemsOrdered.size());
 
         System.out.println("Search Result:");
         for(DigitalVideoDisc disc : tmp) {
@@ -189,8 +190,8 @@ public class Cart {
 
     public void filterByTitle(String title) {
         boolean found = false;
-        DigitalVideoDisc[] tmp = new DigitalVideoDisc[this.qtyOrdered];
-        System.arraycopy(this.itemsOrdered, 0, tmp, 0, this.qtyOrdered);
+        DigitalVideoDisc[] tmp = new DigitalVideoDisc[this.itemsOrdered.size()];
+        System.arraycopy(this.itemsOrdered, 0, tmp, 0, this.itemsOrdered.size());
 
         System.out.println("Search Result:");
         for(DigitalVideoDisc disc : tmp) {

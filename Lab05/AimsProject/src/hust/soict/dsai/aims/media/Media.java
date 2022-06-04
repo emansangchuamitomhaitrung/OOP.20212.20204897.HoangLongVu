@@ -2,7 +2,7 @@ package hust.soict.dsai.aims.media;
 
 import java.time.LocalDate;
 
-public class Media {
+public abstract class Media {
     protected String title;
     protected String category;
     protected float cost;
