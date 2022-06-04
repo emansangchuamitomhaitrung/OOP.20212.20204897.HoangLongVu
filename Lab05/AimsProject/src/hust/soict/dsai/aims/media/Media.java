@@ -10,12 +10,19 @@ public abstract class Media {
     protected int id;
     protected static int nbMedia = 0;
 
-    public Media(String title, String category, float cost, LocalDate dateAdded, int id) {
+    public Media(String title, String category, float cost) {
         this.title = title;
         this.category = category;
         this.cost = cost;
-        this.dateAdded = dateAdded;
-        this.id = id;
+    }
+
+    public Media(String title, String category) {
+        this.title = title;
+        this.category = category;
+    }
+
+    public Media(String title) {
+        this.title = title;
     }
 
     public String getTitle() {

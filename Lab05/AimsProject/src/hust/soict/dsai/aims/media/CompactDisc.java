@@ -3,7 +3,7 @@ package hust.soict.dsai.aims.media;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class CompactDisc extends Disc {
+public class CompactDisc extends Disc implements Playable {
     private String artist;
     public ArrayList<Track> tracks = new ArrayList<Track>();
 
@@ -11,8 +11,24 @@ public class CompactDisc extends Disc {
         return artist;
     }
 
-    public CompactDisc(String title, String category, float cost, LocalDate dateAdded, int id, int length, String director) {
-        super(title, category, cost, dateAdded, id, length, director);
+    public CompactDisc(String title, String artist) {
+        super(title);
+        this.artist = artist;
+    }
+
+    public CompactDisc(String title, String category, float cost, String artist) {
+        super(title, category, cost);
+        this.artist = artist;
+    }
+
+    public CompactDisc(String title, String director, String category, float cost, String artist) {
+        super(title, director, category, cost);
+        this.artist = artist;
+    }
+
+    public CompactDisc(String title, String director, String category, int length, float cost, String artist) {
+        super(title, director, category, length, cost);
+        this.artist = artist;
     }
 
     public void addTrack(Track track) {
@@ -43,4 +59,12 @@ public class CompactDisc extends Disc {
         return totalLength;
     }
 
+    @Override
+    public void play() {
+        System.out.println("Playing tracks by: " + this.artist);
+        System.out.println("Total length: " + this.getLength());
+        for(Track track : tracks) {
+            track.play();
+        }
+    }
 }
