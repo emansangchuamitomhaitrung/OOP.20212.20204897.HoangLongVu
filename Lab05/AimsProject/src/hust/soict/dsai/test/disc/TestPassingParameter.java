@@ -11,13 +11,13 @@ public class TestPassingParameter {
         System.out.println("swap method");
         DVDWrapper jungleDVDWrapper = new DVDWrapper(jungleDVD);
         DVDWrapper cinderellaDVDWrapper = new DVDWrapper(cinderellaDVD);
-        swap(jungleDVDWrapper, cinderellaDVDWrapper);
+        //swap(jungleDVDWrapper, cinderellaDVDWrapper);
         System.out.println("Jungle DVD title: " + jungleDVDWrapper.dvd.getTitle());
         System.out.println("Cinderella DVD title: " + cinderellaDVDWrapper.dvd.getTitle());
 
         System.out.println();
         System.out.println("changeTitle method");
-        changeTitle(jungleDVD, cinderellaDVD.getTitle());
+        //changeTitle(jungleDVD, cinderellaDVD.getTitle());
         System.out.println("Jungle DVD title: " + jungleDVD.getTitle());
         System.out.println("Cinderella DVD tile: " + cinderellaDVD.getTitle());
     }
@@ -32,6 +32,7 @@ public class TestPassingParameter {
      */
 
     // this works
+    /*
     public static void swap(DVDWrapper DW1, DVDWrapper DW2) {
         DigitalVideoDisc tmp = DW1.dvd;
         DW1.dvd = DW2.dvd;
@@ -44,6 +45,8 @@ public class TestPassingParameter {
         dvd = new DigitalVideoDisc(oldTitle);
 
     }
+
+     */
 
 }
 

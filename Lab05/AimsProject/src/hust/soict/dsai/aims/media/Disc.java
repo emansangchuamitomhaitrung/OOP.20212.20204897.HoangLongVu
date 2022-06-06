@@ -1,7 +1,5 @@
 package hust.soict.dsai.aims.media;
 
-import java.time.LocalDate;
-
 public class Disc extends Media {
     protected int length;
     protected String director;

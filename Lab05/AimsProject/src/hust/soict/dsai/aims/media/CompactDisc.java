@@ -1,6 +1,5 @@
 package hust.soict.dsai.aims.media;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CompactDisc extends Disc implements Playable {

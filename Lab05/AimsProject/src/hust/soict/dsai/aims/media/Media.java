@@ -14,11 +14,13 @@ public abstract class Media {
         this.title = title;
         this.category = category;
         this.cost = cost;
+        this.id = nbMedia;
     }
 
     public Media(String title, String category) {
         this.title = title;
         this.category = category;
+        this.id = nbMedia;
     }
 
     public Media(String title) {
@@ -37,15 +39,16 @@ public abstract class Media {
         return cost;
     }
 
-    public LocalDate getDateAdded() {
-        return dateAdded;
-    }
-
     public int getId() {
         return id;
     }
 
     public static int getNbMedia() {
         return nbMedia;
+    }
+
+    public String toString() {
+        return this.getClass().getSimpleName() + " (ID = " + this.id + ") - " + this.title + "\t - \t" + this.category
+                + "\t - \t $" + this.cost;
     }
 }

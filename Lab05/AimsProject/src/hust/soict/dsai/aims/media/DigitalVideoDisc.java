@@ -13,14 +13,6 @@ public class DigitalVideoDisc extends Disc implements Playable {
         return dateAdded;
     }
 
-    public String getDirector() {
-        return director;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
     public DigitalVideoDisc(String title, String director, String category, float cost) {
         super(title, category, director, cost);
         this.id = nbDigitalVideoDiscs;
