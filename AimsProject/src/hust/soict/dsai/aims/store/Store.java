@@ -5,7 +5,6 @@ import hust.soict.dsai.aims.media.Media;
 import java.util.ArrayList;
 
 public class Store {
-    //private final List<DigitalVideoDisc> itemsInStore = new ArrayList<DigitalVideoDisc>();
     private ArrayList<Media> itemsInStore = new ArrayList<Media>();
 
     public void addMedia(Media medium) {
@@ -19,7 +18,6 @@ public class Store {
         }
         this.itemsInStore.remove(medium);
         System.out.println("DVD removed successfully. Title: " + medium.getTitle());
-
     }
 
     public Media searchMedia(String title) {

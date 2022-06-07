@@ -15,16 +15,20 @@ public abstract class Media {
         this.category = category;
         this.cost = cost;
         this.id = nbMedia;
+        nbMedia++;
     }
 
     public Media(String title, String category) {
         this.title = title;
         this.category = category;
         this.id = nbMedia;
+        nbMedia++;
     }
 
     public Media(String title) {
         this.title = title;
+        this.id = nbMedia;
+        nbMedia++;
     }
 
     public String getTitle() {
@@ -51,4 +55,10 @@ public abstract class Media {
         return this.getClass().getSimpleName() + " (ID = " + this.id + ") - " + this.title + "\t - \t" + this.category
                 + "\t - \t $" + this.cost;
     }
+
+    public String getDetails() { // Yes it is similar to the above method, I will remove redundancy if I have time later :(
+        return this.getClass().getSimpleName() + " (ID = " + this.id + ") - " + this.title + "\t - \t" + this.category
+                + "\t - \t $" + this.cost;
+    }
+
 }

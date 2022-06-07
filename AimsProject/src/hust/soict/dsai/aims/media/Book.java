@@ -34,4 +34,16 @@ public class Book extends Media {
         System.out.println("Author " + authorName + " removed from the list.");
     }
 
+    public String getDetails() {
+        StringBuffer authorList = new StringBuffer();
+        if(this.authors.size() >= 1) {
+            for(int i = 0; i < this.authors.size()-1; i++) {
+                authorList.append(this.authors.get(i));
+                authorList.append(", ");
+            }
+            authorList.append(this.authors.get(this.authors.size() - 1));
+        }
+        return "Book: (ID = " + this.id + ") - " + this.title + "\t - \t"
+                + this.category + "\t - \t$" + this.cost + "\n- Authors: " + authorList;
+    }
 }

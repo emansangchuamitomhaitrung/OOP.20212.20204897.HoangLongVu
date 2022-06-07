@@ -60,10 +60,25 @@ public class CompactDisc extends Disc implements Playable {
 
     @Override
     public void play() {
-        System.out.println("Playing tracks by: " + this.artist);
-        System.out.println("Total length: " + this.getLength());
-        for(Track track : tracks) {
-            track.play();
+        if(this.getLength() <= 0) {
+            System.out.println("The CD cannot be played");
         }
+        else {
+            System.out.println("Playing tracks by: " + this.artist);
+            System.out.println("Total length: " + this.getLength());
+            for (Track track : tracks) {
+                track.play();
+            }
+        }
+    }
+
+    public String getDetails() {
+        StringBuffer trackInfo = new StringBuffer();
+        for(Track track : tracks) {
+            trackInfo.append(track.toString());
+        }
+        return "CD: (ID = " + this.id + ") - " + this.title + "\t - \t" + this.category +
+                "\t - \t" + this.artist + "\t - \t" + this.director + "\t - \t" + this.length +
+                "\t - \t$" + this.cost + "\n- Tracks: " + trackInfo;
     }
 }

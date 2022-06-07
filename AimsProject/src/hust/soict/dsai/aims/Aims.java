@@ -47,6 +47,14 @@ public class Aims {
         store.addMedia(cd1);
         store.addMedia(book1);
 
+        // Daemon Test
+        /*
+        MemoryDaemon daemon = new MemoryDaemon();
+        daemon.run();
+        Thread daemon = new Thread();
+        daemon.setDaemon(true);
+        daemon.start();
+         */
         showMenu();
     }
 
@@ -137,7 +145,7 @@ public class Aims {
             title = scan.nextLine();
             result = store.searchMedia(title);
         }
-        System.out.println(result);
+        System.out.println(result.getDetails());
 
         System.out.println("Do you want to add this item to cart? [y/n]");
         String ynOption = scan.nextLine();
