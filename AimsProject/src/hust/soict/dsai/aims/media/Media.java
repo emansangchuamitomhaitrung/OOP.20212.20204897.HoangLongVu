@@ -61,4 +61,12 @@ public abstract class Media {
                 + "\t - \t $" + this.cost;
     }
 
+    public boolean equals(Object o) {
+        if(o instanceof Media) {
+            Media that = (Media) o;
+            return (this.getId() == that.getId());
+        }
+        else return false;
+    }
+
 }

@@ -35,4 +35,13 @@ public class Track implements Playable  {
     public String toString() {
         return this.title + "\t - \t" + this.length;
     }
+
+    public boolean equals(Object o) {
+        if(o instanceof Track) {
+            Track that = (Track) o;
+            return ((this.getTitle() == that.getTitle()) && (this.getLength() == that.getLength()));
+        }
+        else return false;
+    }
+
 }
