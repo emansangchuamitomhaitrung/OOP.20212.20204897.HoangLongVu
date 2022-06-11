@@ -1,98 +1,72 @@
 package hust.soict.dsai.aims.media;
+
 import java.time.LocalDate;
-import java.util.Comparator;
 
 public abstract class Media {
-	private String title;
-	private String category;
-	private float cost;
-	private LocalDate dateAdded;
-	private int id;
-	private static int nbMedia = 1;
-	
-	public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
-	public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
-	
-	public boolean equals(Object medium) {
-		if (medium instanceof Media) {
-			try {
-				Media that = (Media) medium;
-				return this.title.toLowerCase().equals(that.getTitle().toLowerCase());
-			} catch (NullPointerException e1) {
-				return false;
-			} catch (ClassCastException e2) {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean search(String title) {
-		return this.title.toLowerCase().contains(title.toLowerCase());
-	}
+    protected String title;
+    protected String category;
+    protected float cost;
+    protected LocalDate dateAdded;
+    protected int id;
+    protected static int nbMedia = 0;
 
+    public Media(String title, String category, float cost) {
+        this.title = title;
+        this.category = category;
+        this.cost = cost;
+        this.id = nbMedia;
+        nbMedia++;
+    }
 
-	public Media(String title, String category, float cost) {
-		super();
-		this.title = title;
-		this.category = category;
-		this.cost = cost;
-		this.id = nbMedia;
-		nbMedia += 1;
-	}
+    public Media(String title, String category) {
+        this.title = title;
+        this.category = category;
+        this.id = nbMedia;
+        nbMedia++;
+    }
 
+    public Media(String title) {
+        this.title = title;
+        this.id = nbMedia;
+        nbMedia++;
+    }
 
-	public Media(String title, String category) {
-		super();
-		this.title = title;
-		this.category = category;
-		this.id = nbMedia;
-		nbMedia += 1;
-	}
+    public String getTitle() {
+        return title;
+    }
 
+    public String getCategory() {
+        return category;
+    }
 
-	public Media(String title) {
-		super();
-		this.title = title;
-		this.id = nbMedia;
-		nbMedia += 1;
-	}
+    public float getCost() {
+        return cost;
+    }
 
+    public int getId() {
+        return id;
+    }
 
-	public int getID() {
-		return id;
-	}
+    public static int getNbMedia() {
+        return nbMedia;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String toString() {
+        return this.getClass().getSimpleName() + " (ID = " + this.id + ") - " + this.title + "\t - \t" + this.category
+                + "\t - \t $" + this.cost;
+    }
 
+    public String getDetails() { // Yes it is similar to the above method, I will remove redundancy if I have time later :(
+        return this.getClass().getSimpleName() + " (ID = " + this.id + ") - " + this.title + "\t - \t" + this.category
+                + "\t - \t $" + this.cost;
+    }
 
-	public String getCategory() {
-		return category;
-	}
-
-
-	public float getCost() {
-		return cost;
-	}
-
-
-	public LocalDate getDateAdded() {
-		return dateAdded;
-	}
-	
-	public void setDateAdded(LocalDate date) {
-		this.dateAdded = date;
-	}
-	
-	public abstract String getType();
-	
-	public abstract String getDetails();
-	
-	public String toString() {
-		return this.getDetails();
-	}
+    public boolean equals(Object o) {
+        if(o instanceof Media) {
+            Media that = (Media) o;
+            return (this.getId() == that.getId());
+        }
+        else return false;
+    }
 
 }

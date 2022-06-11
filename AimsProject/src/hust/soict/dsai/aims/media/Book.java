@@ -1,77 +1,57 @@
 package hust.soict.dsai.aims.media;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import hust.soict.dsai.aims.exception.*;
+public class Book extends Media implements Comparable<Book> {
+    private List<String> authors = new ArrayList<String>();
 
-public class Book extends Media {
-	private int contentLength;
-	private List<String> authors = new ArrayList<String>();
-	
-	public void addAuthor(String authorName) throws DupplicatedItemException {
-		for (String name: this.authors) {
-			if (name.toLowerCase().equals(authorName.toLowerCase())) {
-				throw new DupplicatedItemException(name + " is already in the list of authors.");
-			}
-		}
-		this.authors.add(authorName);
-		System.out.println(authorName + " has been added to the " + this.getTitle() + " list of authors.");
-	}
-	
-	
-	public void removeAuthor(String authorName) throws NonExistingItemException {
-		for (String name: this.authors) {
-			if (name.toLowerCase().equals(authorName.toLowerCase())) {
-				this.authors.remove(name);
-				System.out.println(name + " has been removed from the " + this.getTitle() + " list of authors.");
-				return;
-			}
-		}
-		throw new NonExistingItemException(authorName + " is not in the list of authors.");
-	}
-	
-	public String getType() {
-		return "Book";
-	}
-	
-	public String getDetails() {
-		StringBuffer authorsList = new StringBuffer();
-		if (this.authors.size() >= 1) {
-			authorsList.append(this.authors.get(0));
-			for (int i = 1; i < this.authors.size(); i++) {
-				authorsList.append(", " + this.authors.get(i));
-			}
-		}
-		return ("Product ID: " + String.valueOf(this.getID())
-		+ "\n" + "\t" + "Title: " + this.getTitle()
-		+ "\n" + "\t" + "Category: " + this.getCategory()
-		+ "\n" + "\t" + "Authors: " + authorsList
-		+ "\n" + "\t" + "Content Length: " + String.valueOf(this.getContentLength()) + " pages"
-		+ "\n" + "\t" + "Price: $" + String.valueOf(this.getCost()));
-	}
-	
-	public Book(String title, String category, int contentLength, float cost) {
-		super(title, category, cost);
-		this.contentLength = contentLength;
-	}
+    public Book(String title, String category, float cost) {
+        super(title, category, cost);
+    }
 
-	public Book(String title, String category, float cost) {
-		super(title, category, cost);
-		// TODO Auto-generated constructor stub
-	}
+    public List<String> getAuthors() {
+        return authors;
+    }
 
-	public Book(String title, String category) {
-		super(title, category);
-		// TODO Auto-generated constructor stub
-	}
+    public void addAuthor(String authorName) {
+        for(String author : this.authors) {
+            if(author.equalsIgnoreCase(authorName.toLowerCase())) {
+                System.out.println("This author is already in the list.");
+            }
+        }
+        this.authors.add(authorName);
+        System.out.println("Author " + authorName + " added sucessfully.");
+    }
 
-	public Book(String title) {
-		super(title);
-		// TODO Auto-generated constructor stub
-	}
+    public void removeAuthor(String authorName) {
+        for(String author : this.authors) {
+            if(!author.equalsIgnoreCase(authorName.toLowerCase())) {
+                System.out.println("Author does not exists. Please try another name.");
+            }
+        }
+        this.authors.remove(authorName);
+        System.out.println("Author " + authorName + " removed from the list.");
+    }
 
-	public int getContentLength() {
-		return contentLength;
-	}
+    public String getDetails() {
+        StringBuffer authorList = new StringBuffer();
+        if(this.authors.size() >= 1) {
+            for(int i = 0; i < this.authors.size()-1; i++) {
+                authorList.append(this.authors.get(i));
+                authorList.append(", ");
+            }
+            authorList.append(this.authors.get(this.authors.size() - 1));
+        }
+        return "Book: (ID = " + this.id + ") - " + this.title + "\t - \t"
+                + this.category + "\t - \t$" + this.cost + "\n- Authors: " + authorList;
+    }
+
+    public int compareTo(Book obj) {
+        if(this.getTitle().compareTo(obj.getTitle()) == 0) {
+            return this.getCategory().compareTo(obj.getCategory());
+        }
+        return this.getTitle().compareTo(obj.getTitle());
+    }
 
 }
