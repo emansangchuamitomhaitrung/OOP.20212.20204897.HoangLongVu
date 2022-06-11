@@ -3,7 +3,7 @@ package hust.soict.dsai.aims.media;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book extends Media implements Comparable<Book> {
+public class Book extends Media {
     private List<String> authors = new ArrayList<String>();
 
     public Book(String title, String category, float cost) {
@@ -47,11 +47,11 @@ public class Book extends Media implements Comparable<Book> {
                 + this.category + "\t - \t$" + this.cost + "\n- Authors: " + authorList;
     }
 
-    public int compareTo(Book obj) {
-        if(this.getTitle().compareTo(obj.getTitle()) == 0) {
-            return this.getCategory().compareTo(obj.getCategory());
-        }
-        return this.getTitle().compareTo(obj.getTitle());
-    }
+//    public int compareTo(Book obj) {
+//        if(this.getTitle().compareTo(obj.getTitle()) == 0) {
+//            return this.getCategory().compareTo(obj.getCategory());
+//        }
+//        return this.getTitle().compareTo(obj.getTitle());
+//    }
 
 }
