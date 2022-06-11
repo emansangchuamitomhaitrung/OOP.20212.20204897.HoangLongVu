@@ -43,9 +43,5 @@ public class Track implements Playable {
         }
         else return false;
     }
-
-//    public int compareTo(Track obj) {
-//        return this.getTitle().compareTo(obj.getTitle());
-//    }
     
 }

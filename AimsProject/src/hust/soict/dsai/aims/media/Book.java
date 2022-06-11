@@ -47,11 +47,18 @@ public class Book extends Media {
                 + this.category + "\t - \t$" + this.cost + "\n- Authors: " + authorList;
     }
 
-//    public int compareTo(Book obj) {
-//        if(this.getTitle().compareTo(obj.getTitle()) == 0) {
-//            return this.getCategory().compareTo(obj.getCategory());
-//        }
-//        return this.getTitle().compareTo(obj.getTitle());
-//    }
+    public String toString() {
+        StringBuffer authorList = new StringBuffer();
+        if(this.authors.size() >= 1) {
+            for(int i = 0; i < this.authors.size()-1; i++) {
+                authorList.append(this.authors.get(i));
+                authorList.append(", ");
+            }
+            authorList.append(this.authors.get(this.authors.size() - 1));
+        }
+        return "Book: " + this.title +
+                        "\nCategory: " + this.category+
+                        "\nAuthors:  " + authorList;
+    }
 
 }

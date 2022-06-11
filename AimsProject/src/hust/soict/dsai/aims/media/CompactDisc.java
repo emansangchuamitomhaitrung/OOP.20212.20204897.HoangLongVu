@@ -1,7 +1,6 @@
 package hust.soict.dsai.aims.media;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class CompactDisc extends Disc implements Playable {
     private String artist;
@@ -83,12 +82,20 @@ public class CompactDisc extends Disc implements Playable {
                 "\t - \t$" + this.cost + "\n- Tracks: " + trackInfo;
     }
 
-//    public int compareTo(CompactDisc obj) {
-//        if(this.getTitle().compareTo(obj.getTitle()) == 0) {
-//            return this.getCategory().compareTo(obj.getCategory());
-//        }
-//        return this.getTitle().compareTo(obj.getTitle());
-//    }
+    public String toString() {
+        StringBuffer trackInfo = new StringBuffer();
+        for(Track track : tracks) {
+            trackInfo.append(track.toString());
+        }
+        return
+                "CD: " + this.title +
+                        "\nCategory: " + this.category +
+                        "\nArtist: " + this.artist +
+                        "\nDirector: " + this.director +
+                        "\nCD length: " + this.getLength() +
+                        "\nCost: " + this.cost +
+                        "\nTracks: " + trackInfo;
+    }
 
 
 
