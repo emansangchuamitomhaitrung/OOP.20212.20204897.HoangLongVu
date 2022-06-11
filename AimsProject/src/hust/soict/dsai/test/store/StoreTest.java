@@ -1,29 +1,31 @@
 package hust.soict.dsai.test.store;
-
-import hust.soict.dsai.aims.media.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.store.Store;
 
 public class StoreTest {
-    public static void main(String[] args) {
-        Store store = new Store();
 
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc("Before sunrise", "Romance", "Richard Linklater", 70, 20f);
-        store.addMedia(dvd1);
+	public static void main(String[] args) throws Exception {
+		//Create the store
+		Store myStore = new Store();
 
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Before sunset", "Romance", "Richard Linklater", 65, 21.5f);
-        store.addMedia(dvd2);
+		//Create DVDs
+		DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
+		DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
+		DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
 
-        DigitalVideoDisc dvd3 = new DigitalVideoDisc("Before midnight", "Romance", "Richard Linklater", 75, 22.3f);
-        store.addMedia(dvd3);
+		//Try adding DVDs
+//		myStore.addMedia(dvd2, 5);
+		myStore.addMedia(dvd2);
+		myStore.addMedia(dvd1);
+		myStore.addMedia(dvd3);
+		myStore.addMedia(dvd1);
+		myStore.addMedia(dvd1);
+		myStore.print();
 
-        DigitalVideoDisc dvd4 = new DigitalVideoDisc("Sadness", "Tragedy", "My Life", 100, 1f);
-        store.addMedia(dvd4);
-
-        store.removeMedia(dvd4);
-
-        store.print();
-    }
-
-
-
+		//Try removing DVDs
+//		myStore.removeMedia(dvd1, 2);
+		myStore.removeMedia(dvd3);
+		myStore.removeMedia(dvd1);
+		myStore.print();
+	}
 }
