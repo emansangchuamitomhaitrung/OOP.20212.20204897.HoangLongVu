@@ -2,7 +2,7 @@ package hust.soict.dsai.aims.media;
 
 import java.time.LocalDate;
 
-public class DigitalVideoDisc extends Disc implements Playable {
+public class DigitalVideoDisc extends Disc implements Playable, Comparable<DigitalVideoDisc> {
     public LocalDate getDateAdded() {
         return dateAdded;
     }

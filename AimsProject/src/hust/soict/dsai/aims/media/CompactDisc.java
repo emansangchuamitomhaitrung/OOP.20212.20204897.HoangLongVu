@@ -1,8 +1,9 @@
 package hust.soict.dsai.aims.media;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class CompactDisc extends Disc implements Playable {
+public class CompactDisc extends Disc implements Playable, Comparable<CompactDisc> {
     private String artist;
     public ArrayList<Track> tracks = new ArrayList<Track>();
 
@@ -81,4 +82,6 @@ public class CompactDisc extends Disc implements Playable {
                 "\t - \t" + this.artist + "\t - \t" + this.director + "\t - \t" + this.length +
                 "\t - \t$" + this.cost + "\n- Tracks: " + trackInfo;
     }
+
+
 }
