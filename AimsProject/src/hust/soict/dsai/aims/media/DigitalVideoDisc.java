@@ -2,7 +2,7 @@ package hust.soict.dsai.aims.media;
 
 import java.time.LocalDate;
 
-public class DigitalVideoDisc extends Disc implements Playable, Comparable<DigitalVideoDisc> {
+public class DigitalVideoDisc extends Disc implements Playable {
     public LocalDate getDateAdded() {
         return dateAdded;
     }
@@ -44,10 +44,10 @@ public class DigitalVideoDisc extends Disc implements Playable, Comparable<Digit
                 + "\t - \t" + this.director + "\t - \t" + this.length + "\t : \t $" + this.cost;
     }
 
-    public int compareTo(DigitalVideoDisc obj) {
-        if(this.getTitle().compareTo(obj.getTitle()) == 0) {
-            return this.getCategory().compareTo(obj.getCategory());
-        }
-        return this.getTitle().compareTo(obj.getTitle());
-    }
+//    public int compareTo(DigitalVideoDisc obj) {
+//        if(this.getTitle().compareTo(obj.getTitle()) == 0) {
+//            return this.getCategory().compareTo(obj.getCategory());
+//        }
+//        return this.getTitle().compareTo(obj.getTitle());
+//    }
 }
