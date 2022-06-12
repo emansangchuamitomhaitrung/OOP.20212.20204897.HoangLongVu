@@ -65,11 +65,6 @@ public abstract class Media implements Comparable<Media>{
                 + "\t - \t $" + this.cost;
     }
 
-    public String getDetails() { // Yes it is similar to the above method, I will remove redundancy if I have time later :(
-        return this.getClass().getSimpleName() + " (ID = " + this.id + ") - " + this.title + "\t - \t" + this.category
-                + "\t - \t $" + this.cost;
-    }
-
     public boolean equals(Object o) {
         if(o instanceof Media) {
             Media that = (Media) o;

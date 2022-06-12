@@ -30,4 +30,14 @@ public class Disc extends Media {
     public String getDirector() {
         return director;
     }
+
+    public void play() {
+        if(this.length <= 0 ) {
+            System.out.println("This DVD cannot be played");
+        }
+        else {
+            System.out.println("Playing DVD: " + this.getTitle());
+            System.out.println("DVD length: " + this.getLength());
+        }
+    }
 }

@@ -17,22 +17,20 @@ public class Book extends Media {
     }
 
     public void processContent() {
-        this.contentTokens = Arrays.asList(this.content.split("([.,!?:;'\"-]|\\s)+"));
-//        this.contentTokens = Arrays.asList(this.content.split(" "));
-        Integer ONE = new Integer(1);
-        for(int i=0, n = this.contentTokens.size(); i<n; i++) {
-            String key = this.contentTokens.get(i).toLowerCase();
-            Integer frequency = this.wordFrequency.get(key);
-            if(frequency == null) {
-                frequency = ONE;
+            this.contentTokens = Arrays.asList(this.content.split("([.,!?:;'\"-]|\\s)+")); // split by spaces and punctuations
+            Integer ONE = new Integer(1);
+            for (int i = 0, n = this.contentTokens.size(); i < n; i++) {
+                String key = this.contentTokens.get(i).toLowerCase();
+                Integer frequency = this.wordFrequency.get(key);
+                if (frequency == null) {
+                    frequency = ONE;
+                } else {
+                    int value = frequency.intValue();
+                    frequency = new Integer(value + 1);
+                }
+                this.wordFrequency.put(key, frequency);
             }
-            else {
-                int value = frequency.intValue();
-                frequency = new Integer(value+1);
-            }
-            this.wordFrequency.put(key, frequency);
-        }
-        Map sortedMap = new TreeMap(this.wordFrequency);
+            Map sortedMap = new TreeMap(this.wordFrequency);
     }
 
     public Book(String title, String category, float cost) {
@@ -63,7 +61,7 @@ public class Book extends Media {
         System.out.println("Author " + authorName + " removed from the list.");
     }
 
-    public String getDetails() {
+    public String toString() {
         StringBuffer authorList = new StringBuffer();
         if(this.authors.size() >= 1) {
             for(int i = 0; i < this.authors.size()-1; i++) {
@@ -72,28 +70,20 @@ public class Book extends Media {
             }
             authorList.append(this.authors.get(this.authors.size() - 1));
         }
-        return "Book: (ID = " + this.id + ") - " + this.title + "\t - \t"
-                + this.category + "\t - \t$" + this.cost + "\n- Authors: " + authorList;
-    }
-
-    public String toString() {
-        this.processContent();
-        StringBuffer authorList = new StringBuffer();
-        if(this.authors.size() >= 1) {
-            for(int i = 0; i < this.authors.size()-1; i++) {
-                authorList.append(this.authors.get(i));
-                authorList.append(", ");
-            }
-            authorList.append(this.authors.get(this.authors.size() - 1));
+        if(this.content != null) {
+            this.processContent();
+            return "Book: " + this.title +
+                    "\nCategory: " + this.category +
+                    "\nAuthors:  " + authorList +
+                    "\nBook content: \"" + this.content + "\"" +
+                    "\nContent length: " + this.contentTokens.size() +
+                    "\nToken list: " + this.contentTokens +
+                        "\nWord frequency: " + this.wordFrequency;
         }
         return "Book: " + this.title +
-                        "\nCategory: " + this.category+
-                        "\nAuthors:  " + authorList +
-                        "\nBook content: " + this.content +
-                        "\nContent length: " + this.contentTokens.size() +
-                        "\nToken list: " + this.contentTokens +
-                        "\nWord frequency: " + this.wordFrequency;
-
+                "\nCategory: " + this.category +
+                "\nAuthors:  " + authorList +
+                "\nContent: Empty";
     }
 
 }

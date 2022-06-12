@@ -43,7 +43,7 @@ public class TestMediaCompareTo {
         System.out.println("The DVDs in sorted order are: ");
 
         while(iterator.hasNext()) {
-            System.out.println(((DigitalVideoDisc) iterator.next()).getDetails());
+            System.out.println(((DigitalVideoDisc) iterator.next()).getTitle());
         }
 
         System.out.println("------------------------------------");

@@ -5,8 +5,7 @@ import hust.soict.dsai.aims.media.Media;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
-import java.util.Comparator;
+import java.util.Collections;
 
 
 public class Cart {
@@ -79,69 +78,21 @@ public class Cart {
             System.out.println("Item not found. Please try another ID.");
         }
     }
-/*
-    public DigitalVideoDisc[] sortByTitleCostLength(DigitalVideoDisc[] dvdList) {
-        // sort by title
-        Comparator<DigitalVideoDisc> nameSort = Comparator.comparing(DigitalVideoDisc::getTitle);
 
-        // sort by cost
-        Comparator<DigitalVideoDisc> costSort = Comparator.comparing(DigitalVideoDisc::getCost, Comparator.reverseOrder());
-
-        // sort by length
-        Comparator<DigitalVideoDisc> lengthSort = Comparator.comparing(DigitalVideoDisc::getLength, Comparator.reverseOrder());
-
-        // combining multiple sort comparators
-        Comparator<DigitalVideoDisc> multipleFieldComparator = nameSort
-                .thenComparing(costSort)
-                .thenComparing(lengthSort);
-
-        // sorting
-        Arrays.sort(dvdList, multipleFieldComparator);
-        return dvdList;
-    }
- */
-
-    public ArrayList<Media> sortByTitleCost(ArrayList<Media> mediaList) {
-        // sort by title
-        Comparator<Media> nameSort = Comparator.comparing(Media::getTitle);
-
-        // sort by cost
-        Comparator<Media> costSort = Comparator.comparing(Media::getCost, Comparator.reverseOrder());
-
-        // combining multiple sort comparators
-        Comparator<Media> multipleFieldComparator = nameSort
-                .thenComparing(costSort);
-
-        // sorting
-        mediaList.sort(multipleFieldComparator);
-        return mediaList;
+    public void sortByTitleCost() {
+        Collections.sort(this.itemsOrdered, Media.COMPARE_BY_TITLE_COST);
     }
 
-    public ArrayList<Media> sortByCostTitle(ArrayList<Media> mediaList) {
-        // sort by title
-        Comparator<Media> nameSort = Comparator.comparing(Media::getTitle);
-
-        // sort by cost
-        Comparator<Media> costSort = Comparator.comparing(Media::getCost, Comparator.reverseOrder());
-
-        // combining multiple sort comparators
-        Comparator<Media> multipleFieldComparator = costSort
-                .thenComparing(nameSort);
-
-        // sorting
-        mediaList.sort(multipleFieldComparator);
-        return mediaList;
+    public void sortByCostTitle() {
+        Collections.sort(this.itemsOrdered, Media.COMPARE_BY_COST_TITLE);
     }
-
 
     public void print() {
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
 
-        ArrayList<Media> tmp = (ArrayList<Media>) this.itemsOrdered.clone();
-        sortByTitleCost(tmp);
-        for(int i = 0; i < tmp.size(); i++) {
-            System.out.println(i + 1 + ". " + tmp.get(i).toString());
+        for(int i = 0; i < this.itemsOrdered.size(); i++) {
+            System.out.println(i + 1 + ". " + this.itemsOrdered.get(i).getTitle() + "\t - \t $" + this.itemsOrdered.get(i).getCost());
         }
         if (this.luckyItem != null) {
             System.out.println("(** Lucky Item **) " + this.luckyItem.getTitle() + "\t - \t $"  + this.luckyItem.getCost());
@@ -171,10 +122,9 @@ public class Cart {
 
     public void filterById(int id) {
         boolean found = false;
-        ArrayList<Media> tmp = (ArrayList<Media>) this.itemsOrdered.clone();
 
         System.out.println("Search Result:");
-        for(Media medium : tmp) {
+        for(Media medium : this.itemsOrdered) {
             if(medium.getId() == id) {
                 System.out.println(medium);
                 found = true;
@@ -187,10 +137,9 @@ public class Cart {
 
     public void filterByTitle(String title) {
         boolean found = false;
-        ArrayList<Media> tmp = (ArrayList<Media>) this.itemsOrdered.clone();
 
         System.out.println("Search Result:");
-        for(Media medium : tmp) {
+        for(Media medium : this.itemsOrdered) {
             if(medium.getTitle().equalsIgnoreCase(title)) {
                 System.out.println(medium);
                 found = true;

@@ -72,16 +72,6 @@ public class CompactDisc extends Disc implements Playable {
         }
     }
 
-    public String getDetails() {
-        StringBuffer trackInfo = new StringBuffer();
-        for(Track track : tracks) {
-            trackInfo.append(track.toString());
-        }
-        return "CD: (ID = " + this.id + ") - " + this.title + "\t - \t" + this.category +
-                "\t - \t" + this.artist + "\t - \t" + this.director + "\t - \t" + this.length +
-                "\t - \t$" + this.cost + "\n- Tracks: " + trackInfo;
-    }
-
     public String toString() {
         StringBuffer trackInfo = new StringBuffer();
         for(Track track : tracks) {
@@ -96,7 +86,5 @@ public class CompactDisc extends Disc implements Playable {
                         "\nCost: " + this.cost +
                         "\nTracks: " + trackInfo;
     }
-
-
 
 }

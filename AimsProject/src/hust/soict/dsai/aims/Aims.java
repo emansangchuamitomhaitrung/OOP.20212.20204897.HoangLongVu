@@ -3,9 +3,6 @@ package hust.soict.dsai.aims;
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.store.Store;
-
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -104,6 +101,7 @@ public class Aims {
         System.out.println("1. See a media's details");
         System.out.println("2. Add a media to cart");
         System.out.println("3. See current cart");
+        System.out.println("4. Play a media");
         System.out.println("0. Back");
         System.out.println("--------------------------------");
         System.out.println("Please choose a number: 0-1-2-3");
@@ -112,7 +110,7 @@ public class Aims {
         scan.nextLine();
 
         // check input validity
-        while ((choice != 0) && (choice != 1) && (choice != 2) && (choice != 3)) {
+        while ((choice != 0) && (choice != 1) && (choice != 2) && (choice != 3) && (choice != 4)) {
             System.out.println("Please choose a valid option.");
             choice = scan.nextInt();
             scan.nextLine();
@@ -131,7 +129,28 @@ public class Aims {
             case 3:
                 cartMenu();
                 storeMenu();
+            case 4:
+                playMedia();
+                storeMenu();
         }
+    }
+
+    public static void playMedia() {
+        System.out.println("Enter the title of media you want to play");
+        String title = scan.nextLine();
+        Media result = store.searchMedia(title);
+
+        // check title validity
+        while(!(result instanceof Disc)) {
+            System.out.println("Media cannot be played. Please try another item.");
+            title = scan.nextLine();
+            result = store.searchMedia(title);
+        }
+        Disc disc = (Disc) result;
+        disc.play();
+        System.out.println("Press any key to continue");
+        scan.nextLine();
+        clearScreen();
     }
 
     public static void seeDetails() {
@@ -145,7 +164,7 @@ public class Aims {
             title = scan.nextLine();
             result = store.searchMedia(title);
         }
-        System.out.println(result.getDetails());
+        System.out.println(result);
 
         System.out.println("Do you want to add this item to cart? [y/n]");
         String ynOption = scan.nextLine();
@@ -196,7 +215,8 @@ public class Aims {
         System.out.println("1. Filter media in cart");
         System.out.println("2. Sort media in cart");
         System.out.println("3. Remove media from cart");
-        System.out.println("4. Place order");
+        System.out.println("4. Play a media");
+        System.out.println("5. Place order");
         System.out.println("0. Back");
         System.out.println("--------------------------------");
         System.out.println("Please choose a number: 0-1-2-3-4");
@@ -205,7 +225,7 @@ public class Aims {
         scan.nextLine();
 
         // check input validity
-        while ((choice != 0) && (choice != 1) && (choice != 2) && (choice != 3) && (choice != 4)) {
+        while ((choice != 0) && (choice != 1) && (choice != 2) && (choice != 3) && (choice != 4) && (choice != 5)) {
             System.out.println("Please choose a valid option.");
             choice = scan.nextInt();
             scan.nextLine();
@@ -224,6 +244,9 @@ public class Aims {
                 removeFromCart();
                 cartMenu();
             case 4:
+                playMedia();
+                cartMenu();
+            case 5:
                 System.out.println("Order created successfully.");
                 System.out.println("Options: ");
                 System.out.println("1. Go back to AIMS Homepage");
@@ -300,30 +323,11 @@ public class Aims {
             case 0:
                 cartMenu();
             case 1:
-                ArrayList<Media> tmp = (ArrayList<Media>) cart.getItemsOrdered().clone();
-                cart.sortByTitleCost(tmp);
-
-                for(int i = 0; i < tmp.size(); i++) {
-                    if(tmp.get(i).getTitle().equalsIgnoreCase(cart.getLuckyItem().getTitle())) {
-                        System.out.println(i + 1 + ". " + tmp.get(i).toString() + " (Lucky Item!!)");
-                    }
-                    System.out.println(i + 1 + ". " + tmp.get(i).toString());
-                }
-                DecimalFormat numberFormat = new DecimalFormat("#.00"); // format two 2 numbers after decimal point
-                System.out.println("Total cost: $" + numberFormat.format(cart.totalCost()));
-
+                cart.sortByTitleCost();
+                System.out.println(cart);
             case 2:
-                ArrayList<Media> tmp2 = (ArrayList<Media>) cart.getItemsOrdered().clone();
-                cart.sortByCostTitle(tmp2);
-
-                for(int i = 0; i < tmp2.size(); i++) {
-                    if(tmp2.get(i).getTitle().equalsIgnoreCase(cart.getLuckyItem().getTitle())) {
-                        System.out.println(i + 1 + ". " + tmp2.get(i).toString() + " (Lucky Item!!)");
-                    }
-                    System.out.println(i + 1 + ". " + tmp2.get(i).toString());
-                }
-                DecimalFormat numberFormat2 = new DecimalFormat("#.00"); // format two 2 numbers after decimal point
-                System.out.println("Total cost: $" + numberFormat2.format(cart.totalCost()));
+                cart.sortByCostTitle();
+                System.out.println(cart);
         }
     }
 
