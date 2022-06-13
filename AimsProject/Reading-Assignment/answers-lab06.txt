@@ -1,0 +1,10 @@
+Lab06
+
+Question: If the passing object is not an instance of Media, what happens?
+Answer: The overridden `equals(Object o)` method will then return false.
+
+Question: Iterate through the list and print out the information of the media by using toString() method. Observe what happens and explain in detail. 
+Answer: The console prints out different information for different types of media, because the parent class
+(Media) has overridden toString() method from Object class, and the children classes (CompactDisc, DigitalVideoDisc, Book) also have overridden the toString() method from the class Media. Therefore when we iterate through the list, it will call the toString() method with respect to the class of the object that it iterates over.
+
+
