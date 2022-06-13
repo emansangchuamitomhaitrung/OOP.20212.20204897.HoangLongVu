@@ -30,7 +30,7 @@ public class Book extends Media {
                 }
                 this.wordFrequency.put(key, frequency);
             }
-            Map sortedMap = new TreeMap(this.wordFrequency);
+            //this.wordFrequency = new TreeMap(this.wordFrequency);
     }
 
     public Book(String title, String category, float cost) {

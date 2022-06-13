@@ -34,6 +34,9 @@ public class Aims {
 
         Book book1 = new Book("The Great Gatsby", "Novel", 20.0f);
         book1.addAuthor("F. Scott Fitzgerald");
+        book1.setContent("In my younger and more vulnerable years my father gave me some advice that I’ve been turning over in my mind ever since.\n" +
+                "“Whenever you feel like criticizing any one,” he told me, “just remember that all the people in this world haven’t had the ad- vantages that you’ve had.”\n" +
+                "He didn’t say any more, but we’ve always been unusually communicative in a reserved way, and I understood that he meant a great deal more than that. In consequence, I’m in- clined to reserve all judgments, a habit that has opened up many curious natures to me and also made me the victim of not a few veteran bores. The abnormal mind is quick to detect and attach itself to this quality when it appears in a normal person, and so it came about that in college I was unjustly accused of being a politician, because I was privy to the secret griefs of wild, unknown men. Most of the confidences were unsought — frequently I have feigned sleep, preoccupation, or a hostile lev- ity when I realized by some unmistakable sign that an intimate revelation was quivering on the horizon; for the intimate revel- ations of young men, or at least the terms in which they ex- press them, are usually plagiaristic and marred by obvious sup- pressions. Reserving judgments is a matter of infinite hope. I am still a little afraid of missing something if I forget that, as my father snobbishly suggested, and I snobbishly repeat, a sense of the fundamental decencies is parcelled out unequally at birth.");
 
         store.addMedia(d1);
         store.addMedia(d2);
@@ -344,7 +347,6 @@ public class Aims {
         }
         cart.addMedia(result);
     }
-
 
     public static void removeFromCart() {
         System.out.println("Enter media title to remove from cart: ");
