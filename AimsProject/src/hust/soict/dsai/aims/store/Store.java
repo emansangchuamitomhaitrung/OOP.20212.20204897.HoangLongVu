@@ -7,6 +7,10 @@ import java.util.ArrayList;
 public class Store {
     private ArrayList<Media> itemsInStore = new ArrayList<Media>();
 
+    public ArrayList<Media> getItemsInStore() {
+        return itemsInStore;
+    }
+
     public void addMedia(Media medium) {
         this.itemsInStore.add(medium);
         System.out.println("DVD added successfully. Title: " + medium.getTitle());
