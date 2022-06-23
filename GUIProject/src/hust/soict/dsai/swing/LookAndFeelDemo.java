@@ -42,7 +42,7 @@ public class LookAndFeelDemo extends JFrame {
             lafClass[i] = lafInfos[i].getClassName();
         }
 
-        lafNames[lafInfos.length] = "Metal_2";
+        lafNames[lafInfos.length] = "Java";
         lafClass[lafInfos.length] = UIManager.getCrossPlatformLookAndFeelClassName();
 
         lafNames[lafInfos.length+1] = "System";

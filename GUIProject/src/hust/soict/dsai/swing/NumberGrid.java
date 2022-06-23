@@ -1,7 +1,5 @@
 package hust.soict.dsai.swing;
 
-import jdk.nashorn.internal.runtime.arrays.NumericElements;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
