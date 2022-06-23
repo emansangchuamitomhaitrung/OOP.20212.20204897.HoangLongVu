@@ -138,8 +138,8 @@ public class StoreManagerScreen extends JFrame {
         JPanel center = new JPanel();
         center.setLayout(new GridLayout(3, 3, 2, 2));
 
-        ArrayList<Media> mediaInStore = store.getItemsInStore();
-        for(int i = 0; i < store.getItemsInStore().size(); i++) {
+        ArrayList<Media> mediaInStore = this.store.getItemsInStore();
+        for(int i = 0; i < this.store.getItemsInStore().size(); i++) {
             MediaStore cell = new MediaStore(mediaInStore.get(i), this);
             center.add(cell);
         }

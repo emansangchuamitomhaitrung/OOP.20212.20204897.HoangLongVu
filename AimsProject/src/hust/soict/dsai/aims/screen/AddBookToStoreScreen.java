@@ -23,7 +23,7 @@ public class AddBookToStoreScreen extends AddItemToStoreScreen {
         cp.add(createNorth(), BorderLayout.NORTH);
         cp.add(createCenter(), BorderLayout.CENTER);
 
-        setTitle(screenName);
+        setTitle("Add Book Screen");
         int[] frameSize = (new StoreManagerScreen(store)).getFrameSize();
         setSize(frameSize[0], frameSize[1]);
         setLocationRelativeTo(null);
@@ -65,9 +65,6 @@ public class AddBookToStoreScreen extends AddItemToStoreScreen {
         addButton = new JButton("Add book");
         addButton.addActionListener(new ButtonListener());
         addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        addSuccessDialog = new JDialog(this);
-        addSuccessDialog.setSize(500, 150);
 
         mainPanel.add(tfTitleDisplay);
         mainPanel.add(tfPanel);

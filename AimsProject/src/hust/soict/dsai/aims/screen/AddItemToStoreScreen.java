@@ -2,7 +2,7 @@ package hust.soict.dsai.aims.screen;
 
 import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.store.Store;
-import javax.swing.JOptionPane;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,11 +15,7 @@ public class AddItemToStoreScreen extends JFrame {
     protected JTextField tfCategory;
     protected JTextField tfCost;
     protected JButton addButton;
-    protected JDialog addSuccessDialog;
-
-    protected static String screenName;
-    protected static String titleName;
-    protected static String buttonName;
+//    protected JDialog addSuccessDialog;
 
     public AddItemToStoreScreen(Store store) {
         this.store = store;
@@ -30,7 +26,7 @@ public class AddItemToStoreScreen extends JFrame {
         cp.add(createNorth(), BorderLayout.NORTH);
         cp.add(createCenter(), BorderLayout.CENTER);
 
-        setTitle(screenName);
+        setTitle("Add Item Screen");
         int[] frameSize = (new StoreManagerScreen(store)).getFrameSize();
         setSize(frameSize[0], frameSize[1]);
         setLocationRelativeTo(null);
@@ -68,9 +64,10 @@ public class AddItemToStoreScreen extends JFrame {
         tfPanel.setLayout(new GridLayout(3, 2, 3, 3));
         tfPanel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
 
-        tfTitle = new JTextField(10);
-        tfCost = new JTextField(10);
-        tfCategory = new JTextField(10);
+        this.tfTitle = new JTextField(10);
+        this.tfCost = new JTextField(10);
+        this.tfCategory = new JTextField(10);
+        this.addButton = new JButton("Add item");
 
         tfPanel.add(new JLabel("Title "));
         tfPanel.add(tfTitle);
@@ -84,15 +81,15 @@ public class AddItemToStoreScreen extends JFrame {
         mainPanel.setBorder(BorderFactory.createEmptyBorder(25,25,25,25));
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         Font font = new Font("MS Sans Serif", Font.BOLD, 15);
-        JLabel tfTitleDisplay = new JLabel(titleName);
+        JLabel tfTitleDisplay = new JLabel("Add item to store");
 
         tfTitleDisplay.setFont(font);
         tfTitleDisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addButton = new JButton(buttonName);
+//        addButton = new JButton("Add item");
         addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         ButtonListener btnListener = new ButtonListener();
         addButton.addActionListener(btnListener);
-        addSuccessDialog = new JDialog(this);
+//        addSuccessDialog = new JDialog(this);
 
         mainPanel.add(tfTitleDisplay);
         mainPanel.add(tfPanel);
@@ -140,21 +137,21 @@ public class AddItemToStoreScreen extends JFrame {
 
             switch (button) {
                 case "Add book":
-                    addSuccessDialog.add(new JLabel("Book " + mediaTitle + " added successfully!"));
+                    JOptionPane.showMessageDialog(null,"Book " + tfTitle.getText() +  "added successfully","Add Book",JOptionPane.INFORMATION_MESSAGE);
                     store.addMedia(new Book(mediaTitle, mediaCategory, mediaCost));
                     tfTitle.setText("");
                     tfCategory.setText("");
                     tfCost.setText("");
                     break;
                 case "Add CD":
-                    addSuccessDialog.add(new JLabel("CD " + mediaTitle + " added successfully!"));
+                    JOptionPane.showMessageDialog(null,"CD " + tfTitle.getText() +  "added successfully","Add CD",JOptionPane.INFORMATION_MESSAGE);
                     store.addMedia(new CompactDisc(mediaTitle, mediaCategory, mediaCost));
                     tfTitle.setText("");
                     tfCategory.setText("");
                     tfCost.setText("");
                     break;
                 case "Add DVD":
-                    addSuccessDialog.add(new JLabel("DVD " + mediaTitle + " added successfully!"));
+                    JOptionPane.showMessageDialog(null,"DVD " + tfTitle.getText() +  "added successfully","Add DVD",JOptionPane.INFORMATION_MESSAGE);
                     store.addMedia(new DigitalVideoDisc(mediaTitle, mediaCategory, mediaCost));
                     tfTitle.setText("");
                     tfCategory.setText("");

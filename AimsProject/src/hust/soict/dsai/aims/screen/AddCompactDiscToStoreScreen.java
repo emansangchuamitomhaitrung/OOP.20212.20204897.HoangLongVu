@@ -73,9 +73,6 @@ public class AddCompactDiscToStoreScreen extends AddItemToStoreScreen {
         ButtonListener btnListener = new ButtonListener();
         addButton.addActionListener(btnListener);
 
-        addSuccessDialog = new JDialog(this);
-        addSuccessDialog.setSize(500, 150);
-
         mainPanel.add(tfTitleDisplay);
         mainPanel.add(tfPanel);
         mainPanel.add(addButton);
@@ -94,9 +91,7 @@ public class AddCompactDiscToStoreScreen extends AddItemToStoreScreen {
             }
 
             if(button.equals("Add CD")) {
-                addSuccessDialog.add(new JLabel("CD " + tfTitle.getText() + " added successfully!"));
-                addSuccessDialog.setVisible(true);
-                addSuccessDialog.setLocationRelativeTo(null);
+                JOptionPane.showMessageDialog(null,"CD " + tfTitle.getText() +  "added successfully","Add CD",JOptionPane.INFORMATION_MESSAGE);
                 store.addMedia(new CompactDisc(tfTitle.getText(),
                         tfCategory.getText(),
                         Float.parseFloat(tfCost.getText()),

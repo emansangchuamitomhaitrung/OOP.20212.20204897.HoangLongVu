@@ -2,7 +2,6 @@ package hust.soict.dsai.aims.screen;
 
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.store.Store;
-import jdk.nashorn.internal.scripts.JD;
 
 import javax.swing.*;
 import java.awt.*;
@@ -65,8 +64,6 @@ public class AddDigitalVideoDiscToStoreScreen extends AddItemToStoreScreen {
         addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         ButtonListener btnListener = new ButtonListener();
         addButton.addActionListener(btnListener);
-        addSuccessDialog = new JDialog(this);
-        addSuccessDialog.setSize(500, 150);
 
         mainPanel.add(tfTitleDisplay);
         mainPanel.add(tfPanel);
@@ -81,9 +78,8 @@ public class AddDigitalVideoDiscToStoreScreen extends AddItemToStoreScreen {
             String button = e.getActionCommand();
 
             if(button.equals("Add DVD")) {
-                addSuccessDialog.add(new JLabel("DVD " + tfTitle.getText() + " added successfully!"));
-                addSuccessDialog.setVisible(true);
-                addSuccessDialog.setLocationRelativeTo(null);
+                JOptionPane.showMessageDialog(null,"DVD " + tfTitle.getText() +  "added successfully","Add DVD",JOptionPane.INFORMATION_MESSAGE);
+
                 store.addMedia(new DigitalVideoDisc(tfTitle.getText(), tfCategory.getText(), tfDirector.getText(), Integer.parseInt(tfLength.getText()), Float.parseFloat(tfCost.getText())));
                 tfTitle.setText("");
                 tfCategory.setText("");
