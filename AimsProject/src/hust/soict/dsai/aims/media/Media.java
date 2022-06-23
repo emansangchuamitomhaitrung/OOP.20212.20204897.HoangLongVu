@@ -19,6 +19,10 @@ public abstract class Media implements Comparable<Media>{
     public static final Comparator<Media> COMPARE_BY_COST_TITLE =
             new MediaComparatorByCostTitle();
 
+    public Media() {
+
+    }
+
     public Media(String title, String category, float cost) {
         this.title = title;
         this.category = category;

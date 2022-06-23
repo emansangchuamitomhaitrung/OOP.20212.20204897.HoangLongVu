@@ -1,16 +1,69 @@
 package hust.soict.dsai.aims.screen;
 
-import hust.soict.dsai.aims.cart.Cart;
-import hust.soict.dsai.aims.media.Media;
-import hust.soict.dsai.aims.media.Playable;
+import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.store.Store;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class StoreManagerScreen {
+public class StoreManagerScreen extends JFrame {
     private Store store;
+    private int[] frameSize = {1024, 768};
+
+    public int[] getFrameSize() {
+        return frameSize;
+    }
+
+    public void setFrameSize(int[] frameSize) {
+        this.frameSize = frameSize;
+    }
+
+    public static void main(String[] args) {
+        Store store = new Store();
+        // populate store
+        DigitalVideoDisc d1 = new DigitalVideoDisc("The Lion King",
+                "Animation", "Roger Allers", 87, 19.95f);
+
+        DigitalVideoDisc d2 = new DigitalVideoDisc("Before sunrise", "Romance", "Richard Linklater", 70, 20f);
+
+        DigitalVideoDisc d3 = new DigitalVideoDisc("Before sunset", "Romance", "Richard Linklater", 65, 21.5f);
+
+        DigitalVideoDisc d4 = new DigitalVideoDisc("Before midnight", "Romance", "Richard Linklater", 75, 22.3f);
+
+        DigitalVideoDisc d5 = new DigitalVideoDisc("Sadness", "Tragedy", "My Life", 100, 1f);
+
+        DigitalVideoDisc d6 = new DigitalVideoDisc("Eternal Sunshine of the Spotless Mind", "Romance", "Michel Gondry", 150, 21.5f);
+
+        CompactDisc cd1 = new CompactDisc("Chai Mai", "Punk", 50.0f, "7UPPERCUTS");
+        CompactDisc cd2 = new CompactDisc("ng'bthg", "Pop/Rock", 30.0f, "Ngot");
+
+        Track track1 = new Track("Wave Alpha", 180);
+        cd1.addTrack(track1);
+        Track track2 = new Track("Em Dao Nay", 200);
+        cd2.addTrack(track2);
+
+        Book book1 = new Book("The Great Gatsby", "Novel", 20.0f);
+        book1.addAuthor("F. Scott Fitzgerald");
+        book1.setContent("In my younger and more vulnerable years my father gave me some advice that I’ve been turning over in my mind ever since.\n" +
+                "“Whenever you feel like criticizing any one,” he told me, “just remember that all the people in this world haven’t had the ad- vantages that you’ve had.”\n" +
+                "He didn’t say any more, but we’ve always been unusually communicative in a reserved way, and I understood that he meant a great deal more than that. In consequence, I’m in- clined to reserve all judgments, a habit that has opened up many curious natures to me and also made me the victim of not a few veteran bores. The abnormal mind is quick to detect and attach itself to this quality when it appears in a normal person, and so it came about that in college I was unjustly accused of being a politician, because I was privy to the secret griefs of wild, unknown men. Most of the confidences were unsought — frequently I have feigned sleep, preoccupation, or a hostile lev- ity when I realized by some unmistakable sign that an intimate revelation was quivering on the horizon; for the intimate revel- ations of young men, or at least the terms in which they ex- press them, are usually plagiaristic and marred by obvious sup- pressions. Reserving judgments is a matter of infinite hope. I am still a little afraid of missing something if I forget that, as my father snobbishly suggested, and I snobbishly repeat, a sense of the fundamental decencies is parcelled out unequally at birth.");
+
+        store.addMedia(d1);
+        store.addMedia(d2);
+        store.addMedia(d3);
+        store.addMedia(d4);
+        store.addMedia(d5);
+        store.addMedia(d6);
+        store.addMedia(cd1);
+        store.addMedia(cd2);
+        store.addMedia(book1);
+
+        new StoreManagerScreen(store);
+
+    }
 
     public StoreManagerScreen(Store store) {
         this.store = store;
@@ -21,9 +74,10 @@ public class StoreManagerScreen {
         cp.add(createCenter(), BorderLayout.CENTER);
 
         setTitle("Store");
-        setSize(1024, 768);
+        setSize(this.frameSize[0], this.frameSize[1]);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setVisilble(true);
+        setVisible(true);
     }
 
     JPanel createNorth() {
@@ -36,18 +90,30 @@ public class StoreManagerScreen {
 
     JMenuBar createMenuBar() {
         JMenu menu = new JMenu("Options");
+        JMenuItem viewStore = new JMenuItem("View Store");
+        menu.add(viewStore);
+        viewStore.addActionListener(new ViewStoreListener());
 
         JMenu smUpdateStore = new JMenu("Update Store");
-        smUpdateStore.add(new JMenuItem("Add Book"));
-        smUpdateStore.add(new JMenuItem("Add CD"));
-        smUpdateStore.add(new JMenuItem("Add DVD"));
+
+        JMenuItem addBook = new JMenuItem("Add Book");
+        smUpdateStore.add(addBook);
+        addBook.addActionListener(new SwitchToAddBookListener());
+
+
+        JMenuItem addCD = new JMenuItem("Add CD");
+        smUpdateStore.add(addCD);
+        addCD.addActionListener(new SwitchToAddCDListener());
+
+        JMenuItem addDVD= new JMenuItem("Add DVD");
+        smUpdateStore.add(addDVD);
+        addDVD.addActionListener(new SwitchToAddDVDListener());
 
         menu.add(smUpdateStore);
-        menu.add(new JMenuItem("View Store"));
-        menu.add(new JMenuItem("Logout"));
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
+        menuBar.add(menu);
 
         return menuBar;
     }
@@ -73,43 +139,42 @@ public class StoreManagerScreen {
         center.setLayout(new GridLayout(3, 3, 2, 2));
 
         ArrayList<Media> mediaInStore = store.getItemsInStore();
-        for(int i = 0; i < 9; i++) {
-            MediaStore cell = new MediaStore(mediaInStore.get(i));
+        for(int i = 0; i < store.getItemsInStore().size(); i++) {
+            MediaStore cell = new MediaStore(mediaInStore.get(i), this);
             center.add(cell);
         }
         return center;
     }
 
-    public class MediaStore extends JPanel {
-        private Media media;
-        private Cart cart;
-        public MediaStore(Media media, Cart cart) {
-            this.media = media;
-            this.cart = cart;
-            this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-            JLabel title = new JLabel(media.getTitle());
-            title.setFont(new Font(title.getFont(),getName(), Font.PLAIN, 15));
-            title.setAlignmentX(CENTER_ALIGNMENT);
-
-            JLabel cost = new JLabel(""+media.getCost() + " $");
-            cost.setAlignmentX(CENTER_ALIGNMENT);
-
-            JPanel container = new JPanel();
-            container.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-            if(media instanceof Playable) { // check Playable interface
-                JButton playButton = new JButton("Play");
-                container.add(playButton);
-            }
-
-            this.add(Box.createVerticalGlue());
-            this.add(title);
-            this.add(cost);
-            this.add(Box.createVerticalGlue());
-            this.add(container);
-
-            this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    protected class SwitchToAddBookListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();
+            new AddBookToStoreScreen(store);
         }
     }
 
+    protected class SwitchToAddCDListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();
+            new AddCompactDiscToStoreScreen(store);
+        }
+    }
+
+    protected class SwitchToAddDVDListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();
+            new AddDigitalVideoDiscToStoreScreen(store);
+        }
+    }
+
+    protected class ViewStoreListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();
+            new StoreManagerScreen(store);
+        }
+    }
 }
