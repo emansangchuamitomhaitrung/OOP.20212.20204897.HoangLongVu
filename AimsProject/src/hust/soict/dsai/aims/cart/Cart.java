@@ -2,6 +2,8 @@ package hust.soict.dsai.aims.cart;
 
 
 import hust.soict.dsai.aims.media.Media;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -10,10 +12,10 @@ import java.util.Collections;
 
 public class Cart {
     public static final int MAX_NUMBERS_ORDERED = 20;
-    private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
+    private final ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
     private Media luckyItem = null;
 
-    public ArrayList<Media> getItemsOrdered() {
+    public ObservableList<Media> getItemsOrdered() {
         return itemsOrdered;
     }
 
@@ -29,7 +31,9 @@ public class Cart {
         if(this.luckyItem != null) {
             cost -= this.luckyItem.getCost();
         }
-        return cost;
+        DecimalFormat numberFormat = new DecimalFormat("#.00"); // format two 2 numbers after decimal point
+
+        return Float.parseFloat(numberFormat.format(cost));
     }
 
     public void addMedia(Media medium) {

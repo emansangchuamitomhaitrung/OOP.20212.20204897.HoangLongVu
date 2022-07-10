@@ -5,7 +5,7 @@ import hust.soict.dsai.aims.media.Media;
 import java.util.ArrayList;
 
 public class Store {
-    private ArrayList<Media> itemsInStore = new ArrayList<Media>();
+    private final ArrayList<Media> itemsInStore = new ArrayList<Media>();
 
     public ArrayList<Media> getItemsInStore() {
         return itemsInStore;
