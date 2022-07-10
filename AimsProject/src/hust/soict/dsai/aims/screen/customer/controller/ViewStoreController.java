@@ -49,7 +49,7 @@ public class ViewStoreController {
     @FXML
     /*
     The FXML controller can define an initialize() method,
-    which will be called once on an implementing controller
+    which will be called once, on an implementing controller
     when the contents of its associated document have been completely loaded.
 
     TL;DR: The constructor is called first -> @FXML annotated fields are populated -> initialize() is called.
