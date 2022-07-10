@@ -56,8 +56,12 @@ public class CartController {
     private Button btnRemove;
 
     @FXML
-    void btnPlayPressed(ActionEvent event) {
+    private Button btnPlaceOrder;
 
+    @FXML
+    void btnPlayPressed(ActionEvent event) {
+        Media media = this.tblMedia.getSelectionModel().getSelectedItem();
+        ((Playable) media).play();
     }
 
     @FXML
@@ -118,6 +122,19 @@ public class CartController {
         Media media = tblMedia.getSelectionModel().getSelectedItem();
         cart.removeMedia(media);
         totalCost.setText("$" + cart.totalCost());
+    }
+
+
+    @FXML
+    void btnPlaceOrderPressed(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Order ");
+        alert.setContentText("Your order has been placed successfully!");
+        alert.showAndWait();
+
+        for(Media medium:this.cart.getItemsOrdered()) {
+            cart.removeMedia(medium);
+        }
     }
 
 }

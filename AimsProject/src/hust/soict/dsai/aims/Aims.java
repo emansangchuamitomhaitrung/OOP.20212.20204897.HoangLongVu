@@ -1,8 +1,11 @@
 package hust.soict.dsai.aims;
 
 import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.store.Store;
+
+import javax.naming.LimitExceededException;
 import java.util.Scanner;
 
 
@@ -133,12 +136,16 @@ public class Aims {
                 cartMenu();
                 storeMenu();
             case 4:
-                playMedia();
+                try {
+                    playMedia();
+                } catch (PlayerException e) {
+                    e.printStackTrace();
+                }
                 storeMenu();
         }
     }
 
-    public static void playMedia() {
+    public static void playMedia() throws PlayerException {
         System.out.println("Enter the title of media you want to play");
         String title = scan.nextLine();
         Media result = store.searchMedia(title);
@@ -149,8 +156,8 @@ public class Aims {
             title = scan.nextLine();
             result = store.searchMedia(title);
         }
-        Disc disc = (Disc) result;
-        disc.play();
+        DigitalVideoDisc dvd = (DigitalVideoDisc) result;
+        dvd.play();
         System.out.println("Press any key to continue");
         scan.nextLine();
         clearScreen();
@@ -172,7 +179,11 @@ public class Aims {
         System.out.println("Do you want to add this item to cart? [y/n]");
         String ynOption = scan.nextLine();
         if (ynOption.equals("y")) {
-            cart.addMedia(result);
+            try {
+                cart.addMedia(result);
+            } catch (LimitExceededException e) {
+                e.printStackTrace();
+            }
             cart.getALuckyItem();
         } else {
             storeMenu();
@@ -247,7 +258,11 @@ public class Aims {
                 removeFromCart();
                 cartMenu();
             case 4:
-                playMedia();
+                try {
+                    playMedia();
+                } catch (PlayerException e) {
+                    e.printStackTrace();
+                }
                 cartMenu();
             case 5:
                 System.out.println("Order created successfully.");
@@ -345,7 +360,11 @@ public class Aims {
             title = scan.nextLine();
             result = store.searchMedia(title);
         }
-        cart.addMedia(result);
+        try {
+            cart.addMedia(result);
+        } catch (LimitExceededException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void removeFromCart() {
