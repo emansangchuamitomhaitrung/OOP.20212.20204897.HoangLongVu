@@ -59,10 +59,10 @@ public class Book extends Media {
         System.out.println("Author " + authorName + " added sucessfully.");
     }
 
-    public void removeAuthor(String authorName) {
+    public void removeAuthor(String authorName) throws NoSuchElementException{
         for(String author : this.authors) {
             if(!author.equalsIgnoreCase(authorName.toLowerCase())) {
-                System.out.println("Author does not exists. Please try another name.");
+                throw new NoSuchElementException("Author not exist. Please try again");
             }
         }
         this.authors.remove(authorName);
