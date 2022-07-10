@@ -1,6 +1,9 @@
 package hust.soict.dsai.aims.media;
 
+import hust.soict.dsai.aims.exception.PlayerException;
+
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class CompactDisc extends Disc implements Playable {
     private String artist;
@@ -55,9 +58,9 @@ public class CompactDisc extends Disc implements Playable {
         }
     }
 
-    public void removeTrack(Track track) {
+    public void removeTrack(Track track) throws NoSuchElementException {
         if(!tracks.contains(track)) {
-            System.out.println("The track does not exist. Please try again.");
+            throw new NoSuchElementException("The track does not exist. Please try again.");
         }
         else {
             tracks.remove(track);
@@ -74,16 +77,30 @@ public class CompactDisc extends Disc implements Playable {
     }
 
     @Override
-    public void play() {
+    public void play() throws PlayerException{
         if(this.getLength() <= 0) {
-            System.out.println("The CD cannot be played");
+            throw new PlayerException("The CD cannot be played");
         }
         else {
             System.out.println("Playing tracks by: " + this.artist);
             System.out.println("Total length: " + this.getLength());
-            for (Track track : tracks) {
-                track.play();
+//            for (Track track : tracks) {
+//                try {
+//                    track.play();
+//                } catch (PlayerException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+        java.util.Iterator iter = tracks.iterator();
+        Track nextTrack;
+        while(iter.hasNext()) {
+            nextTrack = (Track) iter.next();
+            try {
+                nextTrack.play();
+            } catch(PlayerException e) {
+                throw e;
             }
+        }
         }
     }
 

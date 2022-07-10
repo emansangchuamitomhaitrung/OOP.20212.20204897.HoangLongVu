@@ -5,9 +5,11 @@ import hust.soict.dsai.aims.media.Media;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.naming.LimitExceededException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EmptyStackException;
+import java.util.NoSuchElementException;
 
 
 public class Cart {
@@ -36,9 +38,9 @@ public class Cart {
         return Float.parseFloat(numberFormat.format(cost));
     }
 
-    public void addMedia(Media medium) {
+    public void addMedia(Media medium) throws LimitExceededException {
         if(this.itemsOrdered.size() >= MAX_NUMBERS_ORDERED) {
-            System.out.println("The cart is almost full.");
+            throw new LimitExceededException("ERROR: The number of media has reached its limit");
         }
         else {
             this.itemsOrdered.add(medium);
@@ -47,9 +49,9 @@ public class Cart {
         getALuckyItem();
     }
 
-    public void removeMedia(Media medium) {
+    public void removeMedia(Media medium) throws NoSuchElementException {
         if(itemsOrdered.size() <= 0) {
-            System.out.println("The current cart is empty.");
+            throw new NoSuchElementException("ERROR: There is no item in the cart");
         }
         else {
             if(!itemsOrdered.contains(medium)) {

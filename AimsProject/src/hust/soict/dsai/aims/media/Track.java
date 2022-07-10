@@ -1,5 +1,7 @@
 package hust.soict.dsai.aims.media;
 
+import hust.soict.dsai.aims.exception.PlayerException;
+
 public class Track implements Playable {
     private final String title;
     private int length;
@@ -22,9 +24,9 @@ public class Track implements Playable {
     }
 
     @Override
-    public void play() {
+    public void play() throws PlayerException {
         if(this.length <= 0) {
-            System.out.println("The track cannot be played");
+            throw new PlayerException("The track cannot be played");
         }
         else {
             System.out.println("Playing track: " + this.getTitle());
