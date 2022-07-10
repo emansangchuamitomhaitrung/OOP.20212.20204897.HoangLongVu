@@ -15,7 +15,6 @@ public class AddItemToStoreScreen extends JFrame {
     protected JTextField tfCategory;
     protected JTextField tfCost;
     protected JButton addButton;
-//    protected JDialog addSuccessDialog;
 
     public AddItemToStoreScreen(Store store) {
         this.store = store;
@@ -85,11 +84,9 @@ public class AddItemToStoreScreen extends JFrame {
 
         tfTitleDisplay.setFont(font);
         tfTitleDisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        addButton = new JButton("Add item");
         addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         ButtonListener btnListener = new ButtonListener();
         addButton.addActionListener(btnListener);
-//        addSuccessDialog = new JDialog(this);
 
         mainPanel.add(tfTitleDisplay);
         mainPanel.add(tfPanel);

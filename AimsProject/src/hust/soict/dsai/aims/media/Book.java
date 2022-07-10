@@ -6,7 +6,7 @@ public class Book extends Media {
     private List<String> authors = new ArrayList<String>();
     private String content;
     private List<String> contentTokens;
-    private Map<String, Integer> wordFrequency = new TreeMap<String, Integer>();
+    private final Map<String, Integer> wordFrequency = new TreeMap<String, Integer>();
 
     public String getContent() {
         return content;
@@ -39,7 +39,6 @@ public class Book extends Media {
                 }
                 this.wordFrequency.put(key, frequency);
             }
-            //this.wordFrequency = new TreeMap(this.wordFrequency);
     }
 
     public Book(String title, String category, float cost) {

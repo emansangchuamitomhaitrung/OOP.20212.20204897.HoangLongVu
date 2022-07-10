@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class StoreManagerScreen extends JFrame {
-    private Store store;
+    private final Store store;
     private int[] frameSize = {1024, 768};
 
     public int[] getFrameSize() {
