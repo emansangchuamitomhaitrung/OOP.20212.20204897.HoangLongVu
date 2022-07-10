@@ -71,15 +71,32 @@ public abstract class Media implements Comparable<Media>{
 
     public boolean equals(Object o) {
         if(o instanceof Media) {
+            try {
+                Media that = (Media) o;
+                return ((this.getId() == that.getId()) && (this.title.equalsIgnoreCase(that.getTitle())));
+            } catch(NullPointerException e1) {
+                return false;
+            } catch(ClassCastException e2) {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+/*        if(o instanceof Media) {
             Media that = (Media) o;
             return (this.getId() == that.getId());
         }
-        else return false;
+        else return false;*/
     }
 
     public int compareTo(Media obj) {
         if(this.getTitle().compareTo(obj.getTitle()) == 0) {
-            return this.getCategory().compareTo(obj.getCategory());
+            try {
+                return this.getCategory().compareTo(obj.getCategory());
+            } catch(NullPointerException e1) {
+                return 0;
+            }
         }
         return this.getTitle().compareTo(obj.getTitle());
     }
