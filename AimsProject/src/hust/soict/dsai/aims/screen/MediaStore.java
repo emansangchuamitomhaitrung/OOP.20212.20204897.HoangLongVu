@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MediaStore extends JPanel {
-    private Media media;
-    private JFrame frame;
+    private final Media media;
+    private final JFrame frame;
 
     public MediaStore(Media media, JFrame frame) {
         this.media = media;
